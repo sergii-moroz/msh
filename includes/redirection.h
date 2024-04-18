@@ -14,11 +14,12 @@
 # define REDIRECTION_H
 
 # include <stdio.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include "cmd.h"
 # include "executor.h"
 
-void	ft_redirection(t_cmd *cmd);
+void	ft_handle_redirection(t_cmd *cmd);
 void	ft_handle_heredoc(t_cmd *cmd);
 
 #endif

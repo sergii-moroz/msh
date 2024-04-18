@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 19:18:35 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/17 12:47:32 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/18 08:38:22 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
+# include <unistd.h>
 # include <sys/wait.h>
 
 # include "app.h"

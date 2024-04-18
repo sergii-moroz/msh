@@ -25,8 +25,8 @@ void	exec_general_cmd(t_cmd *cmd, t_app *app)
 	expander(cmd, &app->env);
 	cmd_join_strnum(cmd);
 	cmd_eat_spaces(cmd);
-	//ft_heredoc(cmd);
-	//ft_redirection(cmd);
+	ft_handle_heredoc(cmd);
+	ft_handle_redirection(cmd);
 	//darray_print_string_row(&cmd->argv);
 	envp = (char **)(app->env).content;
 	argv = (char **)(cmd->argv).content;

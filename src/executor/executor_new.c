@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_new.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:41:04 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/17 14:29:35 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/18 11:03:18 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ static int	is_one_builtin(t_darr *cmds)
 void	exec_builtin(t_cmd *cmd, t_app *app)
 {
 	char	*cmd_name;
+	int		in, out;
 
-
+	in = dup(0);
+	out = dup(1);
 	expander(cmd, &app->env);
-	//ft_handle_heredoc(cmd);
-	//ft_redirection(cmd);
+	ft_handle_heredoc(cmd);
+	ft_handle_redirection(cmd);
 	cmd_name = cmd_argv_at(cmd, 0);
 	if (!ft_strncmp(cmd_name, "cd", 3))
 		ft_cd(cmd, app);
@@ -52,9 +54,9 @@ void	exec_builtin(t_cmd *cmd, t_app *app)
 		ft_unset(cmd, app);
 	else if (!ft_strncmp(cmd_name, "export", 7))
 		ft_export(cmd, app);
+	dup2(out, 1);
+	dup2(in, 0);
 }
-
-
 
 void	exec_pipe_line(t_app *app)
 {
@@ -74,8 +76,9 @@ void	exec_pipe_line(t_app *app)
 		//printf("child: process:\n");
 		exit(0); // move in exec_child_
 	}
-	//printf("   === child pid: %d ===\n", pid);
+	printf("   === waiting child pid: %d ===\n", pid);
 	waitpid(pid, &wstatus, 0);
+	printf("   === exited child pid: %d ===\n", pid);
 	get_exit_code(wstatus, app);
 	//printf("many command\n");
 }

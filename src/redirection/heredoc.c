@@ -24,12 +24,13 @@ static void hdoc_print_fd(t_darr *darr, int fd)
 	}
 }
 
-static void	ft_heredoc(char *end, int *hfd)
+static void	ft_heredoc(char *end, int *fd)
 {
 	char	*line;
 	t_darr	hdoc;
 
 	darray_init(&hdoc);
+	close(fd[0]);
 	while(1)
 	{
 		line = readline("heredoc -> ");
@@ -37,9 +38,10 @@ static void	ft_heredoc(char *end, int *hfd)
 		{
 			free(line);
 			line = NULL;
-			hdoc_print_fd(&hdoc, hfd[1]);
+			dup2(fd[1], 1);//
+			close(fd[1]);
+			hdoc_print_fd(&hdoc, 1);
 			darray_del_all(&hdoc);
-			close(hfd[1]);
 			exit(EXIT_SUCCESS);
 		}
 		if (line && *line)
@@ -49,13 +51,14 @@ static void	ft_heredoc(char *end, int *hfd)
 	}
 }
 
-void	ft_handle_heredoc(t_cmd *cmd)
+void	sub_process_herdoc(char *end, char *cmd_name)
 {
-	t_darr	*redir;
 	pid_t	pid;
-	int		hfd[2];
+	int		fd[2];
+	int		in;
 
-	redir = &cmd->redir;
+	in = dup(STDIN_FILENO);
+	pipe(fd);
 	pid = fork();
 	if (is_fork_error(pid))
 	{
@@ -64,11 +67,40 @@ void	ft_handle_heredoc(t_cmd *cmd)
 	}
 	else if (is_child(pid))
 	{
-		close(hfd[0]);
-		ft_heredoc("END", hfd);
+		ft_heredoc(end, fd);
 	}
-
+	close(fd[1]);
+	dup2(fd[0], 0);
+	close(fd[0]);
+	printf("before wait...\n");
 	waitpid(pid, NULL, 0);
+	printf("after wait...\n");
+	if (is_builtin(cmd_name))
+		dup2(in, 0);
 	//darray_print_string_row(redir);
-	//printf("heredoc\n");
+	printf("END heredoc\n");
+}
+
+void	ft_handle_heredoc(t_cmd *cmd)
+{
+	t_darr	*redir;
+	int		i;
+	char	*end, *cmd_name;
+
+	redir = &cmd->redir;
+	i = 0;
+	while (i < redir->count)
+	{
+		if (!ft_strncmp(darray_get_at(redir, i), "<<", 3))
+		{
+			i++;
+			end = darray_get_at(redir, i);
+			printf(RED"end: \"%s\"\n"RESET, end);
+			//TODO: check for end word. if not set default.
+			cmd_name = cmd_argv_at(cmd, 0);
+			sub_process_herdoc(end, cmd_name);
+		}
+		i++;
+	}
+	printf("exit: handle_heredoc\n");
 }

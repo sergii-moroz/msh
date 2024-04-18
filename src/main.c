@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:29:50 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/16 20:59:09 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/17 20:27:11 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 			// === LEXER ===
 			app.tokens = lexer(line);
-			ft_lstiter(app.tokens, token_print);
+			// ft_lstiter(app.tokens, token_print);
 			// === PARSER ==
 			app.cmds = parser(app.tokens, &app);
-			parser_print_cmd(app.cmds);
+			// parser_print_cmd(app.cmds);
 			// if (app.parser_error)
 			// {
 			// 	app.parser_error = 0;
