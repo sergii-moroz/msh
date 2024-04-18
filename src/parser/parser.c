@@ -80,7 +80,8 @@ t_darr	*parser(t_list *tokens, t_app *app)
 				parser_advance(&data);
 			if (parser_peek_type(&data) == WORD \
 				|| parser_peek_type(&data) == DQUOTE \
-				|| parser_peek_type(&data) == QUOTE)
+				|| parser_peek_type(&data) == QUOTE
+				|| parser_peek_type(&data) == NUM)
 			{
 				parser_advance(&data);
 				token = data.current_token->content;

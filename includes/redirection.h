@@ -15,7 +15,9 @@
 
 # include <stdio.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # include <readline/readline.h>
+
 # include "cmd.h"
 # include "executor.h"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:53:28 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/15 12:20:36 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/18 13:49:56 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 int	ft_env(char **env)
 {
-	int	i;
+	int		i;
+	char	*record;
 
 	i = 0;
 	while (env && *(env + i))
 	{
-		ft_putendl_fd(*(env + i), 1);
+		record = *(env + i);
+		if (ft_isalpha(*record))
+			ft_putendl_fd(record, 1);
 		i++;
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:53:28 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/17 10:30:00 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/18 13:43:18 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_exit(t_cmd *cmd, t_app *app)
 			ft_putstr_fd(exit_code, 2);
 			ft_putendl_fd(": numeric argument required"RESET, 2);
 			env_save_exitcode(&app->env, 2);
-			exit(2);
+			exit(255);
 		}
 	}
 	else

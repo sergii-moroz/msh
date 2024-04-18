@@ -61,14 +61,14 @@ void	exec_grandchild(int i, int *prev, t_app *app)
 	}
 	else if (is_child(pid_grand))
 	{
-		printf("       before handle cmd\n");
+		//printf("       before handle cmd\n");
 		set_stdin(*prev);
 		set_stdout(fd[1]);
 		handle_cmd(i, app);
 	}
-	printf("      === waiting grandchild pid: %d ===\n", pid_grand);
+	//printf("      === waiting grandchild pid: %d ===\n", pid_grand);
 	waitpid(pid_grand, NULL, 0); //works with and without watpid
-	printf("      === exited grandchild pid: %d ===\n", pid_grand);
+	//printf("      === exited grandchild pid: %d ===\n", pid_grand);
 	close(*prev);
 	close(fd[1]);
 	*prev = fd[0];

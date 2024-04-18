@@ -38,7 +38,7 @@ static void	ft_heredoc(char *end, int *fd)
 		{
 			free(line);
 			line = NULL;
-			dup2(fd[1], 1);//
+			dup2(fd[1], 1);
 			close(fd[1]);
 			hdoc_print_fd(&hdoc, 1);
 			darray_del_all(&hdoc);
@@ -55,7 +55,7 @@ void	sub_process_herdoc(char *end, char *cmd_name)
 {
 	pid_t	pid;
 	int		fd[2];
-	int		in;
+	int		in, out;
 
 	in = dup(STDIN_FILENO);
 	pipe(fd);
@@ -72,13 +72,13 @@ void	sub_process_herdoc(char *end, char *cmd_name)
 	close(fd[1]);
 	dup2(fd[0], 0);
 	close(fd[0]);
-	printf("before wait...\n");
+	// printf("before wait...\n");
 	waitpid(pid, NULL, 0);
-	printf("after wait...\n");
-	if (is_builtin(cmd_name))
+	// printf("after wait...\n");
+	//if (is_builtin(cmd_name))
 		dup2(in, 0);
 	//darray_print_string_row(redir);
-	printf("END heredoc\n");
+	// printf("END heredoc\n");
 }
 
 void	ft_handle_heredoc(t_cmd *cmd)
@@ -102,5 +102,5 @@ void	ft_handle_heredoc(t_cmd *cmd)
 		}
 		i++;
 	}
-	printf("exit: handle_heredoc\n");
+	//printf("exit: handle_heredoc\n");
 }

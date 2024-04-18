@@ -20,12 +20,12 @@ void	exec_general_cmd(t_cmd *cmd, t_app *app)
 
 	env_paths = ft_get_env(&app->env, "PATH");
 	cmd->path = get_path2binary(env_paths, darray_get_first(&cmd->argv));
-	printf("found path: %s\n", cmd->path);
+	//printf("found path: %s\n", cmd->path);
 	//darray_print_string_row(&cmd->argv);
 	expander(cmd, &app->env);
 	cmd_join_strnum(cmd);
 	cmd_eat_spaces(cmd);
-	ft_handle_heredoc(cmd);
+	//ft_handle_heredoc(cmd);
 	ft_handle_redirection(cmd);
 	//darray_print_string_row(&cmd->argv);
 	envp = (char **)(app->env).content;

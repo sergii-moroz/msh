@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_new.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:41:04 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/18 11:03:18 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/18 15:53:53 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ static int	is_one_builtin(t_darr *cmds)
 void	exec_builtin(t_cmd *cmd, t_app *app)
 {
 	char	*cmd_name;
-	int		in, out;
+	int		in;
+	int		out;
 
 	in = dup(0);
 	out = dup(1);
 	expander(cmd, &app->env);
-	ft_handle_heredoc(cmd);
+	//ft_handle_heredoc(cmd);
 	ft_handle_redirection(cmd);
 	cmd_name = cmd_argv_at(cmd, 0);
 	if (!ft_strncmp(cmd_name, "cd", 3))
@@ -76,9 +77,9 @@ void	exec_pipe_line(t_app *app)
 		//printf("child: process:\n");
 		exit(0); // move in exec_child_
 	}
-	printf("   === waiting child pid: %d ===\n", pid);
+	//printf("   === waiting child pid: %d ===\n", pid);
 	waitpid(pid, &wstatus, 0);
-	printf("   === exited child pid: %d ===\n", pid);
+	//printf("   === exited child pid: %d ===\n", pid);
 	get_exit_code(wstatus, app);
 	//printf("many command\n");
 }

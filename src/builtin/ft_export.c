@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:53:28 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/17 16:05:21 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/18 14:00:34 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_export_add_var(t_darr *env, char *s)
 	int	key_len;
 	int	i;
 
-	if (!ft_isalpha(*s) && *s != '_')
+	if (!ft_isvalid_identifier(s)) // <- here i check only first character
 	{
 		ft_putstr_fd("-bash: "RED"export: '", 2);
 		ft_putstr_fd(s, 2);
@@ -81,7 +81,7 @@ static int	ft_export_add_var(t_darr *env, char *s)
 			darray_append(env, ft_strdup(s));
 			darray_del_at(env, i);
 		}
-		printf(BLUE"env: changed\n"RESET);
+		//printf(BLUE"env: changed\n"RESET);
 		//darray_print_string_row(env);
 		return (EXIT_SUCCESS);
 	}

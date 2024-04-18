@@ -50,7 +50,7 @@ int	ft_isvalid_identifier(char *s)
 	if (!ft_isalpha(*s) && *s != '_')
 		return (0);
 	s++;
-	while (*s)
+	while (*s && *s != '=')
 	{
 		if (!ft_isalnum(*s) && *s != '_')
 			return (0);

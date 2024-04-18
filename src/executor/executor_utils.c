@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 18:13:55 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/17 10:39:11 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/18 13:34:26 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	get_exit_code(int wstatus, t_app *app)
 	if (WIFEXITED(wstatus))
 	{
 		exit_code = WEXITSTATUS(wstatus);
-		printf("statusCode: %d, wstatus: %d\n", exit_code, wstatus); // TODO: Save status Code to $?
+		//printf("statusCode: %d, wstatus: %d\n", exit_code, wstatus); // TODO: Save status Code to $?
 	}
 	else if (WIFSIGNALED(wstatus))
 	{
 		exit_code = WTERMSIG(wstatus);
-		printf("signalCode: %d, wstatus: %d\n", exit_code, wstatus); // TODO: Save status Code to $?
+		//printf("signalCode: %d, wstatus: %d\n", exit_code, wstatus); // TODO: Save status Code to $?
 	}
 	env_save_exitcode(&app->env, exit_code);
 	return (exit_code);
