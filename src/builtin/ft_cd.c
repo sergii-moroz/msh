@@ -56,7 +56,13 @@ int	ft_cd(t_cmd *cmd, t_app *app)
 	//darray_print_string_row(argv);
 	if (argv->count == 1)
 		path = ft_get_env(&app->env, "HOME");
-	else if (argv->count > 1)
+	else if (argv->count > 2)
+	{
+		ft_putendl_fd(BLACK "-msh:"RED" cd: too many arguments"RESET, 2);
+		env_save_exitcode(&app->env, EXIT_FAILURE);
+		return (EXIT_FAILURE);
+	}
+	else if (argv->count == 2)
 		path = cmd_argv_at(cmd, 1);
 	if (!ft_strlen(path))
 	{

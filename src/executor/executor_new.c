@@ -38,7 +38,7 @@ void	exec_builtin(t_cmd *cmd, t_app *app)
 	in = dup(0);
 	out = dup(1);
 	expander(cmd, &app->env);
-	handle_heredoc(cmd);
+	handle_heredoc(cmd, app);
 	ft_handle_redirection(cmd);
 	cmd_name = cmd_argv_at(cmd, 0);
 	if (!ft_strncmp(cmd_name, "cd", 3))
