@@ -24,83 +24,89 @@ static void hdoc_print_fd(t_darr *darr, int fd)
 	}
 }
 
-static void	ft_heredoc(char *end, int *fd)
+static t_darr	heredoc_read(char *end)
 {
 	char	*line;
 	t_darr	hdoc;
 
 	darray_init(&hdoc);
-	close(fd[0]);
 	while(1)
 	{
-		line = readline("heredoc -> ");
+		line = readline(BLUE"heredoc"ARROW RESET);
 		if (!ft_strncmp(line, end, ft_strlen(end) + 1))
 		{
 			free(line);
-			line = NULL;
-			dup2(fd[1], 1);
-			close(fd[1]);
-			hdoc_print_fd(&hdoc, 1);
-			darray_del_all(&hdoc);
-			exit(EXIT_SUCCESS);
+			return (hdoc);
 		}
 		if (line && *line)
-		{
 			darray_append(&hdoc, line);
-		}
 	}
 }
 
-void	sub_process_herdoc(char *end, char *cmd_name)
+// void	ft_handle_heredoc(t_cmd *cmd)
+static void	hpipe(t_darr *hdoc)
 {
-	pid_t	pid;
-	int		fd[2];
-	int		in, out;
+	pid_t	hpid;
+	int		hfd[2];
+	//int		in, out;
 
-	in = dup(STDIN_FILENO);
-	pipe(fd);
-	pid = fork();
-	if (is_fork_error(pid))
+	//in = dup(STDIN_FILENO);
+	pipe(hfd);
+	hpid = fork();
+	if (is_fork_error(hpid))
 	{
 		perror("fork: failed");
 		exit(1);
 	}
-	else if (is_child(pid))
+	else if (is_child(hpid))
 	{
-		ft_heredoc(end, fd);
+		dup2(hfd[1], 1);
+		close(hfd[1]);
+		close(hfd[0]);
+		hdoc_print_fd(hdoc, 1);
+		darray_del_all(hdoc);
+		exit(EXIT_SUCCESS);
 	}
-	close(fd[1]);
-	dup2(fd[0], 0);
-	close(fd[0]);
-	// printf("before wait...\n");
-	waitpid(pid, NULL, 0);
-	// printf("after wait...\n");
+	dup2(hfd[0], 0);
+	close(hfd[0]);
+	close(hfd[1]);
+	waitpid(hpid, NULL, 0);
 	//if (is_builtin(cmd_name))
-		dup2(in, 0);
-	//darray_print_string_row(redir);
-	// printf("END heredoc\n");
+	//	dup2(in, 0);
 }
 
-void	ft_handle_heredoc(t_cmd *cmd)
+//static void	heredocs(t_cmd *cmd, int *hfd)
+void	handle_heredoc(t_cmd *cmd, t_app *app)
 {
 	t_darr	*redir;
 	int		i;
 	char	*end, *cmd_name;
+	t_darr	hdoc;
+	int		oldout = dup(1); // added 21.04.2024 solution for cat <<END | tr e E
 
+	darray_init(&hdoc);
 	redir = &cmd->redir;
 	i = 0;
 	while (i < redir->count)
 	{
 		if (!ft_strncmp(darray_get_at(redir, i), "<<", 3))
 		{
+			dup2(app->in, 0); //added 20.04.2024 solution for pwd | cat <<END
+			dup2(app->out, 1); // added 21.04.2024 solution for cat <<END | tr e E
 			i++;
 			end = darray_get_at(redir, i);
-			printf(RED"end: \"%s\"\n"RESET, end);
 			//TODO: check for end word. if not set default.
-			cmd_name = cmd_argv_at(cmd, 0);
-			sub_process_herdoc(end, cmd_name);
+			//cmd_name = cmd_argv_at(cmd, 0);
+			if (hdoc.count > 0)
+				darray_del_all(&hdoc);
+			hdoc = heredoc_read(end);
 		}
 		i++;
 	}
-	//printf("exit: handle_heredoc\n");
+	if (hdoc.count > 0)
+	{
+		dup2(oldout, 1); // added 21.04.2024 solution for cat <<END | tr e E
+		hpipe(&hdoc);
+	}
+	//darray_print_string_row(&hdoc);
 }

@@ -29,6 +29,8 @@ typedef struct s_app
 	char	*msh_line;
 	t_list	*tokens;
 	t_darr	*cmds;
+	int		in;
+	int		out;
 }			t_app;
 
 #define MSH BLACK"msh "RESET

@@ -22,6 +22,6 @@
 # include "executor.h"
 
 void	ft_handle_redirection(t_cmd *cmd);
-void	ft_handle_heredoc(t_cmd *cmd);
+void	handle_heredoc(t_cmd *cmd, t_app *app);
 
 #endif

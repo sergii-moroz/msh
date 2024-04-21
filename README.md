@@ -1,9 +1,13 @@
 # msh
 
+## TODOs:
+- Signals (glocal variable save the number of received signal)
 
 ## Known issues
 
 - crash by heredoc without command: '<< END'
+- if command consist only from spaces, than msh return command not found. it means command execution was started.
+- Check if multiple tries of the same redirections fail. (don't fail at the moment)
 
 ## Time line
 

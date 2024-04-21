@@ -72,6 +72,8 @@ void	darray_del_all(t_darr *darr)
 {
 	int	i;
 
+	if (!darr)
+		return ;
 	i = 0;
 	while (i < darr->count)
 	{

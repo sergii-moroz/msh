@@ -63,6 +63,7 @@ void	exec_grandchild(int i, int *prev, t_app *app)
 	{
 		//printf("       before handle cmd\n");
 		set_stdin(*prev);
+		//dup2(app->out, 1);
 		set_stdout(fd[1]);
 		handle_cmd(i, app);
 	}
