@@ -18,21 +18,25 @@ void	exec_general_cmd(t_cmd *cmd, t_app *app)
 	char	**argv;
 	char	**envp;
 
-	env_paths = ft_get_env(&app->env, "PATH");
-	cmd->path = get_path2binary(env_paths, darray_get_first(&cmd->argv));
 	//printf("found path: %s\n", cmd->path);
-	//darray_print_string_row(&cmd->argv);
 	expander(cmd, &app->env);
 	cmd_join_strnum(cmd);
 	cmd_eat_spaces(cmd);
 	handle_heredoc(cmd, app);
+	if (cmd->argv.count == 0)
+		exit(EXIT_SUCCESS);
+	env_paths = ft_get_env(&app->env, "PATH");
+	cmd->path = get_path2binary(env_paths, darray_get_first(&cmd->argv));
+	// darray_print_string_row(&cmd->argv);
+	// darray_print_int_row(&cmd->argvtype);
 	ft_handle_redirection(cmd);
 	//darray_print_string_row(&cmd->argv);
 	envp = (char **)(app->env).content;
 	argv = (char **)(cmd->argv).content;
 	execve(cmd->path, argv, envp);
-	ft_putendl_fd("-msh: command not found", 1);
-	exit(EXIT_FAILURE);
+	ft_putendl_fd("-msh: command not found", 2);
+	exit(127);
+	//exit(EXIT_FAILURE);
 }
 
 void	handle_cmd(int i, t_app *app)

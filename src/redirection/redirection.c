@@ -45,6 +45,13 @@ void	redir_out(char *name)
 	}
 	//printf("File\n");
 	fd = open(name, O_CREAT | O_WRONLY | O_TRUNC);
+	if (fd < 0)
+	{
+		ft_putstr_fd(BLACK"-msh: "RESET RED, 2);
+		ft_putstr_fd(name, 2);
+		ft_putendl_fd(": Operation not permitted"RESET, 2);
+		exit(1);
+	}
 	dup2(fd, 1);
 	close(fd);
 }
@@ -60,6 +67,13 @@ void	redir_append(char *name)
 		exit(126);
 	}
 	fd = open(name, O_CREAT | O_WRONLY | O_APPEND);
+	if (fd < 0)
+	{
+		ft_putstr_fd(BLACK"-msh: "RESET RED, 2);
+		ft_putstr_fd(name, 2);
+		ft_putendl_fd(": Operation not permitted"RESET, 2);
+		exit(1);
+	}
 	dup2(fd, 1);
 	close(fd);
 }

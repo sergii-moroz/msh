@@ -23,7 +23,7 @@ void	cmd_eat_spaces(t_cmd *cmd)//t_darr *argv, t_darr *type)
 	i = 0;
 	while (i < argv->count)
 	{
-		if (*(int *)darray_get_at(type, i) == SPACES)
+		if (*(int *)darray_get_at(type, i) == SPACES || ft_strlen(darray_get_at(argv, i)) == 0)
 		{
 			darray_del_at(argv, i);
 			darray_del_at(type, i);

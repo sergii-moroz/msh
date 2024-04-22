@@ -15,6 +15,8 @@
 
 int	is_builtin(char *path_name)
 {
+	if (!path_name)
+		return (0);
 	if (!ft_strncmp(path_name, "cd", 3) || \
 		!ft_strncmp(path_name, "pwd", 4) || \
 		!ft_strncmp(path_name, "env", 4) || \

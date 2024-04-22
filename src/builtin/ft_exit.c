@@ -41,7 +41,7 @@ int	ft_exit(t_cmd *cmd, t_app *app)
 			ft_putstr_fd(exit_code, 2);
 			ft_putendl_fd(": numeric argument required"RESET, 2);
 			env_save_exitcode(&app->env, 2);
-			exit(255);
+			exit(2);
 		}
 	}
 	else
