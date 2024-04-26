@@ -22,8 +22,10 @@ void	env_save_exitcode(t_darr *env, int exitcode)
 	key = "?";
 	i = env_key_index(env, key, ft_strlen(key));
 	temp = ft_strjoin(key, "=");
-	record = ft_strjoin(temp, ft_itoa(exitcode));
+	key = ft_itoa(exitcode);
+	record = ft_strjoin(temp, key);
 	free(temp);
+	free(key);
 	darray_append(env, record);
 	if (i > 0)
 		darray_del_at(env, i);

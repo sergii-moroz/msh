@@ -35,3 +35,18 @@ void	parser_print_cmd(t_darr *darr)
 		i++;
 	}
 }
+
+int	parser_is_legrd(int type)
+{
+	if (type == GREAT || type == DGREAT || type == LESS || type == DLESS)
+		return (1);
+	return (0);
+}
+
+int	parser_is_argv(int type)
+{
+	if (type == WORD || type == QUOTE || type == DQUOTE || \
+		type == SPACES || type == NUM)
+		return (1);
+	return (0);
+}

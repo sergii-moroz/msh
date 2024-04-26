@@ -77,5 +77,6 @@ int	app_destroy(t_app *app)
 	free(app->msh_line);
 	darray_del_all(&app->env);
 	ft_lstclear(&(app->tokens), token_destroy);
+	// here destroy app->cmds
 	return (1);
 }

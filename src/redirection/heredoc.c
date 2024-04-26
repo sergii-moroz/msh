@@ -84,6 +84,9 @@ void	handle_heredoc(t_cmd *cmd, t_app *app)
 	t_darr	hdoc;
 	int		oldout = dup(1); // added 21.04.2024 solution for cat <<END | tr e E
 
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+
 	darray_init(&hdoc);
 	redir = &cmd->redir;
 	i = 0;

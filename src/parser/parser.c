@@ -25,7 +25,7 @@ static t_list	*parser_peek(t_parser_data *data)
 	return (NULL);
 }
 
-static int	parser_peek_type(t_parser_data *data)
+int	parser_peek_type(t_parser_data *data)
 {
 	t_list	*node;
 	t_token	*token;
@@ -45,75 +45,40 @@ static int	parser_peek_type(t_parser_data *data)
 t_darr	*parser(t_list *tokens, t_app *app)
 {
 	t_parser_data	data;
-	t_darr			*cmd_arr;
+	t_darr			*cmd_arr; // why it is pointer -> rewrite to darray
 	t_cmd			*cmd;
 	t_token			*token;
 
 	if (!tokens)
 		return (NULL);
-	//printf("\n=== START PARSER ===\n");
 	parser_init(tokens, &data);
-	cmd_arr = malloc(sizeof(t_cmd *));
+	cmd_arr = malloc(sizeof(t_darr *));
 	if (!cmd_arr)
-		exit(10);
+		exit(10); //TODO proper exit
 	darray_init(cmd_arr);
 	cmd = malloc(sizeof(t_cmd));
 	cmd_init(cmd);
-	while (data.current_token)
+	while (data.current_token && !app->parser_error)
 	{
 		token = data.current_token->content;
-		//token_print(token);
-		if (token->type == WORD || token->type == QUOTE \
-			|| token->type == DQUOTE || token->type == SPACES
-			|| token->type == NUM)
-		{
-			cmd_append_argv(cmd, token->value);
-			cmd_append_argvtype(cmd, &(token->type));
-		}
-		else if (token->type == GREAT || token->type == DGREAT \
-				|| token->type == LESS || token->type == DLESS)
-		{
-			cmd_append_redir(cmd, token->value);
-
-			// === io_file ===
-			if (parser_peek_type(&data) == SPACES)
-				parser_advance(&data);
-			if (parser_peek_type(&data) == WORD \
-				|| parser_peek_type(&data) == DQUOTE \
-				|| parser_peek_type(&data) == QUOTE
-				|| parser_peek_type(&data) == NUM)
-			{
-				parser_advance(&data);
-				token = data.current_token->content;
-				cmd_append_redir(cmd, token->value);
-			}
-			else
-			{
-				ft_putendl_fd("filename expected", 1);
-				app->parser_error = TRUE;
-				break;
-				//exit(1); // TODO: Clean & Exit
-			} // end === io_file ===
-		}
+		if (parser_is_argv(token->type))
+			parser_handle_argv(&cmd, token);
+		else if (parser_is_legrd(token->type))
+			parser_handle_redir(&cmd, token->value, &data, app);
 		else if (token->type == PIPE)
-		{
-			darray_append(cmd_arr, cmd);
-			cmd = malloc(sizeof(t_cmd));
-			cmd_init(cmd);
-			if (parser_peek_type(&data) == SPACES)
-				parser_advance(&data);
-		}
+			cmd = parser_handle_pipe(&cmd_arr, cmd, &data);
 		parser_advance(&data);
 	}
+	/* 26.04.2024
+	I don't need this block. I could destroy cmds in the app destructor
 	if (app->parser_error)
 	{
-		darray_destroy(cmd_arr);
+		darray_destroy(cmd_arr); //TODO and destroy cmd
 		return (NULL);
 	}
 	else
+	*/
 		darray_append(cmd_arr, cmd);
-
 	// parser_print_cmd(cmd_arr);
-	//printf("=== END PARSER ===\n\n");
 	return (cmd_arr);
 }

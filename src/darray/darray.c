@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:00:34 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/17 13:12:11 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/26 12:52:32 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	darray_del_at(t_darr *darr, int i)
 {
 	if (i < 0 || i >= darr->count)
 		return ;
+	//free(darray_get_at(darr, i));
 	ft_memmove(darr->content + i, darr->content + i + 1, (darr->count - i) * sizeof(int *));
 	(darr->count)--;
 }
