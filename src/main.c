@@ -49,18 +49,13 @@ int	main(int argc, char **argv, char **env)
 		line = readline(app.msh_line);
 		if (!line)
 			break;
-		/*if (!ft_strncmp(line, "q", 2) || !ft_strncmp(line, "quit", 5))
-		{
-
-			break;
-		}*/
 		if (*line)
 		{
 			add_history(line);
 			app.tokens = lexer(line);
 			// ft_lstiter(app.tokens, token_print);
-			app.cmds = parser(app.tokens, &app);
-			// parser_print_cmd(app.cmds);
+			parser(app.tokens, &app);
+			// parser_print_cmd(&app.cmds);
 			// if (app.parser_error)
 			// {
 			// 	app.parser_error = 0;
@@ -70,6 +65,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		free(line);
 		ft_lstclear(&app.tokens, token_destroy);
+		//darray_del_all(&app.cmds);
 	}
 	line_destroy(line);
 	app_destroy(&app);

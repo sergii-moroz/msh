@@ -43,7 +43,7 @@ void	handle_cmd(int i, t_app *app)
 {
 	t_cmd	*cmd;
 
-	cmd = darray_get_at(app->cmds, i);
+	cmd = darray_get_at(&app->cmds, i);
 	if (is_builtin(darray_get_first(&cmd->argv)))
 	{
 		exec_builtin(cmd, app); //TODO: adjust exit code

@@ -34,7 +34,7 @@ void	exec_child(t_app *app)
 
 	prev = STDIN_FILENO;
 	i = 0;
-	while (i < (app->cmds)->count - 1)
+	while (i < (app->cmds).count - 1)
 	{
 		//printf("      === [ %d ] exec cmd:\n", i);
 		exec_grandchild(i, &prev, app);

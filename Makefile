@@ -24,7 +24,7 @@ SRC		=	main.c \
 			error.c \
 			darray.c darray_get.c darray_print.c \
 			cmd.c cmd_get.c cmd_append.c cmd_utils.c\
-			parser.c parser_utils.c parser_utils_2.c \
+			parser.c parser_utils_1.c parser_utils_2.c \
 			executor_new.c executor_utils.c executor_child.c \
 			handle_cmd.c \
 			builtin_utils.c ft_pwd.c ft_env.c ft_cd.c ft_exit.c ft_export.c ft_unset.c ft_echo.c \

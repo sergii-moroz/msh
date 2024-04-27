@@ -49,15 +49,12 @@ static void	app_copy_env(char **env, t_app *app)
 void	app_init(t_app *app, char **env)
 {
 	app_copy_env(env, app);
-	//app->envl = ft_envl_create(envp);
-	//app->env_changed = FALSE;
 	app->tokens = NULL;
-	app->parser_error = FALSE;
+	app->had_error = FALSE;
 	app->path = getcwd(NULL, 0);
 	app->msh_line = app_set_msh(app);
 	app->in = dup(0);
 	app->out = dup(1);
-	//printf(BLACK"app->env: "YELLOW"%p\n"RESET, (app->env).content);
 }
 
 /*int	app_env_update(t_list *envl, char *key, char *value)

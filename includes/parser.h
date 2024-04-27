@@ -27,19 +27,18 @@ typedef struct s_parser_data
 }			t_parser_data;
 
 //			parser.c
-//static void	parser_init(t_list *tokens, t_parser_data *data);
 //static t_list	*parser_peek(t_parser_data *data)
 int		parser_peek_type(t_parser_data *data);
-t_darr	*parser(t_list *tokens, t_app *app);
+void	parser(t_list *tokens, t_app *app);
 
-//		parser_utils.c
+//		parser_utils_1.c
 void	parser_advance(t_parser_data *data);
 void	parser_print_cmd(t_darr *darr);
 int		parser_is_legrd(int type);
 int		parser_is_argv(int type);
 
 //		parser_utils_2.c
-t_cmd	*parser_handle_pipe(t_darr **cmd_arr, t_cmd *cmd, t_parser_data *data);
+t_cmd	*parser_handle_pipe(t_app *app, t_cmd *cmd, t_parser_data *data);
 void	parser_handle_argv(t_cmd **cmd, t_token *token);
-void	parser_handle_redir(t_cmd **cmd, char *value, t_parser_data *data, t_app *app);
+void	handle_redir(t_cmd **cmd, char *value, t_parser_data *data, t_app *app);
 #endif

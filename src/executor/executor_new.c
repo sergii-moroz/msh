@@ -86,8 +86,8 @@ void	exec_pipe_line(t_app *app)
 
 void	executor(t_app *app)
 {
-	if (is_one_builtin(app->cmds))
-		exec_builtin(darray_get_first(app->cmds), app);
+	if (is_one_builtin(&app->cmds))
+		exec_builtin(darray_get_first(&app->cmds), app);
 	else
 		exec_pipe_line(app);
 }

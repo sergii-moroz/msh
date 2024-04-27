@@ -22,13 +22,11 @@
 typedef struct s_app
 {
 	t_darr	env;
-	//int		envp_changed;
-	//t_list	*envl;
-	int		parser_error;
+	int		had_error;
 	char	*path;
 	char	*msh_line;
 	t_list	*tokens;
-	t_darr	*cmds;
+	t_darr	cmds;
 	int		in;
 	int		out;
 }			t_app;

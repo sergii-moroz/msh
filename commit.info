@@ -1,0 +1,12 @@
+app.h
+parser.h
+app.c
+main.c
+executor_child.c
+executor_new.c
+handle_cmd.c
+parser_utils_1.c
+parser_utils_2.c
+parser.c
+
+git commit -m "changed app.cmds from pointer to value. Parser was rewritten to use app.cmds as value. Parser module norminette."

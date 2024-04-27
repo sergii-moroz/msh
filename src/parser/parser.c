@@ -12,12 +12,6 @@
 
 #include "../includes/parser.h"
 
-static void	parser_init(t_list *tokens, t_parser_data *data)
-{
-	data->current_token = tokens;
-	data->had_error = FALSE;
-}
-
 static t_list	*parser_peek(t_parser_data *data)
 {
 	if (data->current_token)
@@ -42,43 +36,29 @@ int	parser_peek_type(t_parser_data *data)
 	return (-1);
 }
 
-t_darr	*parser(t_list *tokens, t_app *app)
+void	parser(t_list *tokens, t_app *app)
 {
 	t_parser_data	data;
-	t_darr			*cmd_arr; // why it is pointer -> rewrite to darray
 	t_cmd			*cmd;
 	t_token			*token;
 
 	if (!tokens)
-		return (NULL);
-	parser_init(tokens, &data);
-	cmd_arr = malloc(sizeof(t_darr *));
-	if (!cmd_arr)
-		exit(10); //TODO proper exit
-	darray_init(cmd_arr);
-	cmd = malloc(sizeof(t_cmd));
-	cmd_init(cmd);
-	while (data.current_token && !app->parser_error)
+		return ;
+	data.current_token = tokens;
+	darray_init(&app->cmds);
+	cmd = cmd_create(app);
+	if (!cmd)
+		return ;
+	while (data.current_token && !app->had_error)
 	{
 		token = data.current_token->content;
 		if (parser_is_argv(token->type))
 			parser_handle_argv(&cmd, token);
 		else if (parser_is_legrd(token->type))
-			parser_handle_redir(&cmd, token->value, &data, app);
+			handle_redir(&cmd, token->value, &data, app);
 		else if (token->type == PIPE)
-			cmd = parser_handle_pipe(&cmd_arr, cmd, &data);
+			cmd = parser_handle_pipe(app, cmd, &data);
 		parser_advance(&data);
 	}
-	/* 26.04.2024
-	I don't need this block. I could destroy cmds in the app destructor
-	if (app->parser_error)
-	{
-		darray_destroy(cmd_arr); //TODO and destroy cmd
-		return (NULL);
-	}
-	else
-	*/
-		darray_append(cmd_arr, cmd);
-	// parser_print_cmd(cmd_arr);
-	return (cmd_arr);
+	darray_append(&app->cmds, cmd);
 }
