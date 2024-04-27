@@ -36,3 +36,17 @@ void	cmd_print(t_cmd	*cmd)
 	ft_putstr_fd(CYAN"      RDIR: "RESET, 1);
 	darray_print_string_row(&(cmd->redir));
 }
+
+t_cmd	*cmd_create(t_app *app)
+{
+	t_cmd	*cmd;
+
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
+	{
+		app->had_error = TRUE;
+		return (NULL);
+	}
+	cmd_init(cmd);
+	return (cmd);
+}
