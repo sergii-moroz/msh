@@ -40,7 +40,6 @@ static t_token	*get_next_token(t_lexer_data *data)
 {
 	while (data->current_char)
 	{
-		//skip_spaces(data);
 		if (ft_isspace(data->current_char))
 			return (lexer_get_spaces(data));
 		if (data->current_char == '(' || data->current_char == ')')

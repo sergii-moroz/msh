@@ -53,7 +53,7 @@ static char	*cut_word(t_lexer_data *data)
 	int	start;
 
 	start = data->i;
-	while(data->current_char && \
+	while (data->current_char && \
 		!is_less_great_or_and(data->current_char) && \
 		!is_quote(data->current_char) && \
 		!ft_isspace(data->current_char))
