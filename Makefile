@@ -22,7 +22,7 @@ SRC		=	main.c \
 			lexer.c lexer_utils.c lexer_methods_1.c \
 			lexer_methods_2.c lexer_methods_3.c lexer_token.c \
 			error.c \
-			darray.c darray_get.c darray_print.c \
+			darray.c darray_get.c darray_print.c darray_del.c \
 			cmd.c cmd_get.c cmd_append.c cmd_utils.c\
 			parser.c parser_utils_1.c parser_utils_2.c \
 			executor_new.c executor_utils.c executor_child.c \

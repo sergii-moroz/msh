@@ -30,6 +30,8 @@ typedef struct s_darr
 void	darray_init(t_darr *darr);
 void	darray_append(t_darr *darr, void *content);
 void	darray_destroy(t_darr *darr);
+
+//		darray_del.c
 void	darray_del_at(t_darr *darr, int i);
 void	darray_del_all(t_darr *darr);
 

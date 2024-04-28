@@ -1,4 +1,7 @@
-cmd_get.c
-cmd_utils.c
+darray.h
+darray.c
+darray_get.c
+darray_del.c
+Makefile
 
-git commit -m "cmd module norminette. Added functions: cmd_isvalid_type(), cmd_join_helper()"
+git commit -m "darray module norminette."
