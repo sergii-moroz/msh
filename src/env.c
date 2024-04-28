@@ -28,7 +28,10 @@ void	env_save_exitcode(t_darr *env, int exitcode)
 	free(key);
 	darray_append(env, record);
 	if (i > 0)
+	{
+		free(darray_get_at(env, i));
 		darray_del_at(env, i);
+	}
 }
 
 void	env_save_keyval(t_darr *env, char *key, char *val)
@@ -76,4 +79,3 @@ char *ft_get_env(t_darr *env, char *key)
 		return (NULL);
 	return (paths + i + 1);
 }
-

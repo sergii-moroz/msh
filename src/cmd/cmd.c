@@ -24,6 +24,7 @@ void	cmd_destroy(t_cmd	*cmd)
 	darray_destroy(&(cmd->argv));
 	darray_destroy(&(cmd->argvtype));
 	darray_destroy(&(cmd->redir));
+	free(&cmd->path);
 }
 
 void	cmd_print(t_cmd	*cmd)
@@ -49,4 +50,21 @@ t_cmd	*cmd_create(t_app *app)
 	}
 	cmd_init(cmd);
 	return (cmd);
+}
+
+void	cmd_clean(t_app *app)
+{
+	int		i;
+	t_darr	*darr;
+
+	darr = &app->cmds;
+	if (!darr)
+		return ;
+	i = 0;
+	while (i < darr->count)
+	{
+		cmd_destroy(darray_get_at(darr, i));
+		i++;
+	}
+	free(darr->content);
 }

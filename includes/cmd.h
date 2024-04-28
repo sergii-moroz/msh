@@ -31,6 +31,7 @@ void	cmd_init(t_cmd *cmd);
 void	cmd_destroy(t_cmd	*cmd);
 void	cmd_print(t_cmd	*cmd);
 t_cmd	*cmd_create(t_app *app);
+void	cmd_clean(t_app *app);
 
 //		cmd_append.c
 void	cmd_append_argv(t_cmd *cmd, void *argv);

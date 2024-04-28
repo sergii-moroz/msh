@@ -1,5 +1,6 @@
-lexer.h
-lexer.c
-lexer_methods_1.c
+cmd.h
+cmd.c
+env.c
+main.c
 
-git commit -m "Lexer module norminette."
+git commit -m "added cmd_clean() function. Fixed leaks in the env_save_exitcode() function. Check with valgrind shows 0 leak"

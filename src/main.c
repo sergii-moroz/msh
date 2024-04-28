@@ -53,6 +53,8 @@ int	main(int argc, char **argv, char **env)
 		{
 			add_history(line);
 			app.tokens = lexer(line);
+			if (app.tokens == NULL)
+				break;
 			// ft_lstiter(app.tokens, token_print);
 			parser(app.tokens, &app);
 			// parser_print_cmd(&app.cmds);
@@ -65,7 +67,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		free(line);
 		ft_lstclear(&app.tokens, token_destroy);
-		//darray_del_all(&app.cmds);
+		cmd_clean(&app);
 	}
 	line_destroy(line);
 	app_destroy(&app);
