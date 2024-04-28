@@ -34,7 +34,7 @@ void	cmd_set_argtype_at(t_cmd *cmd, int i, int val)
 
 void	cmd_set_argv_at(t_cmd *cmd, int i, void *s)
 {
-	t_darr *argv;
+	t_darr	*argv;
 
 	argv = &(cmd->argv);
 	*(argv->content + i) = s;

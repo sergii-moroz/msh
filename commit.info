@@ -1,6 +1,4 @@
-cmd.h
-cmd.c
-env.c
-main.c
+cmd_get.c
+cmd_utils.c
 
-git commit -m "added cmd_clean() function. Fixed leaks in the env_save_exitcode() function. Check with valgrind shows 0 leak"
+git commit -m "cmd module norminette. Added functions: cmd_isvalid_type(), cmd_join_helper()"
