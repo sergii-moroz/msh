@@ -24,21 +24,25 @@ int	is_fork_error(pid_t pid)
 
 int	get_exit_code(int wstatus, t_app *app)
 {
-	int exit_code;
+	int	exit_code;
 
 	exit_code = 0;
 	if (WIFEXITED(wstatus))
-	{
 		exit_code = WEXITSTATUS(wstatus);
-		//printf("statusCode: %d, wstatus: %d\n", exit_code, wstatus); // TODO: Save status Code to $?
-	}
 	else if (WIFSIGNALED(wstatus))
-	{
 		exit_code = WTERMSIG(wstatus);
-		//printf("signalCode: %d, wstatus: %d\n", exit_code, wstatus); // TODO: Save status Code to $?
-	}
 	env_save_exitcode(&app->env, exit_code);
 	return (exit_code);
 }
 
+void	restore_inout(int in, int out)
+{
+	dup2(out, 1);
+	dup2(in, 0);
+}
 
+void	save_inout(int *in, int *out)
+{
+	*in = dup(0);
+	*out = dup(1);
+}

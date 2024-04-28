@@ -23,41 +23,28 @@
 # include "redirection.h"
 
 //		executor.c
-//static int	is_one_builtin(t_darr *cmds);
+// static int	is_one_builtin(t_darr *cmds);
 void	executor(t_app *app);
 void	exec_builtin(t_cmd *cmd, t_app *app);
+void	exec_pipe_line(t_app *app);
 
 //executor_utils.c
 int		is_child(pid_t pid);
 int		is_fork_error(pid_t pid);
 int		get_exit_code(int wstatus, t_app *app);
+void	restore_inout(int in, int out);
+void	save_inout(int *in, int *out);
 
 //		executor_child.c
-//static void	exec_set_stdin(int fd);
-//static void	exec_set_stdout(int fd);
-//static void	exec_grandchild(t_darr *cmds, char **envp, int *prev, int i)
+// static void	set_stdin(int fd);
+// static void	set_stdout(int fd);
 void	exec_child(t_app *app);
 void	exec_grandchild(int i, int *prev, t_app *app);
 
-//		exec_cmd.c
+//		handle_cmd.c
+// static void	exec_general_cmd(t_cmd *cmd, t_app *app);
 void	handle_cmd(int i, t_app *app);
 char	*get_path2binary(char *str, char *cmd);
 void	ft_clean_split(char **split);
-char	*ft_get_env(t_darr *env, char *key);
-
-/*# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include "envp.h"
-# include "builtin.h"
-
-//		executor.c
-void	executor(t_darr *cmds, char **envp);
-//void	pipe_setup(int *fd, int i);
-void	exec_cmd(t_darr *cmds, char **envp, int i);
-
-
-void	expander(char **argv, int **type, char **envp);
-void	eat_spaces(char **argv, int **type);*/
 
 #endif

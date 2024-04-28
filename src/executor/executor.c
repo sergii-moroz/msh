@@ -35,8 +35,7 @@ void	exec_builtin(t_cmd *cmd, t_app *app)
 	int		in;
 	int		out;
 
-	in = dup(0);
-	out = dup(1);
+	save_inout(&in, &out);
 	expander(cmd, &app->env);
 	handle_heredoc(cmd, app);
 	ft_handle_redirection(cmd);
@@ -55,33 +54,28 @@ void	exec_builtin(t_cmd *cmd, t_app *app)
 		ft_unset(cmd, app);
 	else if (!ft_strncmp(cmd_name, "export", 7))
 		ft_export(cmd, app);
-	dup2(out, 1);
-	dup2(in, 0);
+	restore_inout(in, out);
 }
 
 void	exec_pipe_line(t_app *app)
 {
 	pid_t	pid;
-	int	wstatus;
+	int		wstatus;
 
-	//printf("=== fork ===\n");
 	pid = fork();
 	if (is_fork_error(pid))
 	{
 		perror("fork: Failed");
-		exit(EXIT_FAILURE); //TODO: properly clear & exit
+		app->had_error = TRUE;
+		exit(EXIT_FAILURE);
 	}
 	else if (is_child(pid))
 	{
 		exec_child(app);
-		//printf("child: process:\n");
-		exit(0); // move in exec_child_
+		exit(EXIT_SUCCESS);
 	}
-	//printf("   === waiting child pid: %d ===\n", pid);
 	waitpid(pid, &wstatus, 0);
-	//printf("   === exited child pid: %d ===\n", pid);
 	get_exit_code(wstatus, app);
-	//printf("many command\n");
 }
 
 void	executor(t_app *app)

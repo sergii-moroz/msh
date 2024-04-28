@@ -12,13 +12,12 @@
 
 #include "../includes/executor.h"
 
-void	exec_general_cmd(t_cmd *cmd, t_app *app)
+static void	exec_general_cmd(t_cmd *cmd, t_app *app)
 {
 	char	*env_paths;
 	char	**argv;
 	char	**envp;
 
-	//printf("found path: %s\n", cmd->path);
 	expander(cmd, &app->env);
 	cmd_join_strnum(cmd);
 	cmd_eat_spaces(cmd);
@@ -27,16 +26,12 @@ void	exec_general_cmd(t_cmd *cmd, t_app *app)
 		exit(EXIT_SUCCESS);
 	env_paths = ft_get_env(&app->env, "PATH");
 	cmd->path = get_path2binary(env_paths, darray_get_first(&cmd->argv));
-	// darray_print_string_row(&cmd->argv);
-	// darray_print_int_row(&cmd->argvtype);
 	ft_handle_redirection(cmd);
-	//darray_print_string_row(&cmd->argv);
 	envp = (char **)(app->env).content;
 	argv = (char **)(cmd->argv).content;
 	execve(cmd->path, argv, envp);
 	ft_putendl_fd("-msh: command not found", 2);
 	exit(127);
-	//exit(EXIT_FAILURE);
 }
 
 void	handle_cmd(int i, t_app *app)
@@ -46,7 +41,7 @@ void	handle_cmd(int i, t_app *app)
 	cmd = darray_get_at(&app->cmds, i);
 	if (is_builtin(darray_get_first(&cmd->argv)))
 	{
-		exec_builtin(cmd, app); //TODO: adjust exit code
+		exec_builtin(cmd, app);
 		exit(0);
 	}
 	else
@@ -60,10 +55,8 @@ char	*get_path2binary(char *str, char *cmd)
 	char	*temp;
 	int		i;
 
-	// === check local added 09.04
 	if (access(cmd, F_OK) == 0)
 		return (cmd);
-
 	i = 0;
 	paths = ft_split(str, ':');
 	while (paths && *(paths + i))

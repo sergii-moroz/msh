@@ -36,13 +36,9 @@ void	exec_child(t_app *app)
 	i = 0;
 	while (i < (app->cmds).count - 1)
 	{
-		//printf("      === [ %d ] exec cmd:\n", i);
 		exec_grandchild(i, &prev, app);
 		i++;
 	}
-	// wait for grandchild before execute last cmd?????
-	//printf("   === [ %d ] exec :\n", i);
-	//darray_print_string_row(&(app->env)); //print
 	set_stdin(prev);
 	handle_cmd(i, app);
 }
@@ -61,15 +57,11 @@ void	exec_grandchild(int i, int *prev, t_app *app)
 	}
 	else if (is_child(pid_grand))
 	{
-		//printf("       before handle cmd\n");
 		set_stdin(*prev);
-		//dup2(app->out, 1);
 		set_stdout(fd[1]);
 		handle_cmd(i, app);
 	}
-	//printf("      === waiting grandchild pid: %d ===\n", pid_grand);
-	waitpid(pid_grand, NULL, 0); //works with and without watpid
-	//printf("      === exited grandchild pid: %d ===\n", pid_grand);
+	waitpid(pid_grand, NULL, 0);
 	close(*prev);
 	close(fd[1]);
 	*prev = fd[0];

@@ -1,7 +1,8 @@
-darray.h
-darray.c
-darray_get.c
-darray_del.c
+executor.h
+executor_child.c
+executor_utils.c
+executor.c
+handle_cmd.c
 Makefile
 
-git commit -m "darray module norminette."
+git commit -m "executor module norminette."
