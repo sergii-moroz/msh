@@ -55,6 +55,7 @@ void	app_init(t_app *app, char **env)
 	app->msh_line = app_set_msh(app);
 	app->in = dup(0);
 	app->out = dup(1);
+	darray_init(&app->cmds);
 }
 
 /*int	app_env_update(t_list *envl, char *key, char *value)

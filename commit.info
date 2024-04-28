@@ -1,8 +1,8 @@
-executor.h
-executor_child.c
-executor_utils.c
-executor.c
-handle_cmd.c
+cmd.c
+heredoc.c
+redirection.c
+app.c
+main.c
 Makefile
 
-git commit -m "executor module norminette."
+git commit -m "Bug fixing: cmd_clean(). Redirection module partial norminette."

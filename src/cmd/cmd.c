@@ -67,4 +67,5 @@ void	cmd_clean(t_app *app)
 		i++;
 	}
 	free(darr->content);
+	darray_init(darr);
 }

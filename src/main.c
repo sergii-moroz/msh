@@ -26,10 +26,10 @@ void	line_destroy(char *line)
 void	handle_sigint(int num)
 {
 	(void)num;
+	ft_putstr_fd("\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	ft_putstr_fd("\n", 1);
 }
 
 #include <signal.h>
