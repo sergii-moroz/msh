@@ -5,7 +5,7 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
-CFLAGS =	-g -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror -g
 MAKE	=	make
 RM		=	rm -rf
 
@@ -52,7 +52,7 @@ $(OBJ_DIR):
 				mkdir $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o:	%.c
-				$(CC) -c $< -o $@ $(CFLAGS) $(INC)
+				$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean:
 			cd $(LIBFT_DIR) && $(MAKE) clean
@@ -71,7 +71,7 @@ test:
 			echo $(OBJ)
 
 val1:		all
-			valgrind --leak-check=full --show-leak-kinds=all --show-reachable=yes ./minishell
+			valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./minishell
 
-
+#--show-reachable=yes
 .PHONY: all clean fclean re val test

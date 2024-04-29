@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 10:02:39 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/26 15:30:32 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/29 07:52:31 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_parser_data
 }			t_parser_data;
 
 //			parser.c
-//static t_list	*parser_peek(t_parser_data *data)
 int		parser_peek_type(t_parser_data *data);
 void	parser(t_list *tokens, t_app *app);
 

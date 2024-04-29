@@ -6,13 +6,13 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:53:28 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/17 10:58:18 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/29 09:09:21 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/builtin.h"
 
-static int arg_is_n(char *s)
+static int	arg_is_n(char *s)
 {
 	if (*s != '-')
 		return (0);
@@ -24,6 +24,36 @@ static int arg_is_n(char *s)
 	return (1);
 }
 
+static int	print_til_last(t_cmd *cmd, int i)
+{
+	t_darr	*argv;
+	char	*s;
+
+	argv = &cmd->argv;
+	while (i < argv->count - 1)
+	{
+		s = cmd_argv_at(cmd, i);
+		ft_putstr_fd(s, 1);
+		ft_putchar_fd(' ', 1);
+		i++;
+	}
+	return (i);
+}
+
+static int	print_last(t_cmd *cmd, int i)
+{
+	t_darr	*argv;
+	char	*s;
+
+	argv = &cmd->argv;
+	if (i < argv->count)
+	{
+		s = cmd_argv_at(cmd, i);
+		ft_putstr_fd(s, 1);
+	}
+	return (i);
+}
+
 int	ft_echo(t_cmd *cmd, t_app *app)
 {
 	t_darr	*argv;
@@ -33,16 +63,8 @@ int	ft_echo(t_cmd *cmd, t_app *app)
 
 	print_n = 1;
 	argv = &cmd->argv;
-
-	//printf("=== before expander\n");
-	//darray_print_string_row(argv);
-	// DONT WORK expander(cmd, &app->env);
-	//printf("=== after expander\n");
-	//darray_print_string_row(argv);
-
 	cmd_join_strnum(cmd);
 	cmd_eat_spaces(cmd);
-	//darray_print_string_row(argv);
 	i = 1;
 	while (i < argv->count)
 	{
@@ -50,26 +72,13 @@ int	ft_echo(t_cmd *cmd, t_app *app)
 		if (arg_is_n(s))
 			print_n = 0;
 		else
-			break;
+			break ;
 		i++;
 	}
-	while (i < argv->count - 1)
-	{
-		s = cmd_argv_at(cmd, i);
-		ft_putstr_fd(s, 1);
-		ft_putchar_fd(' ', 1);
-		i++;
-	}
-	if (i < argv->count)
-	{
-		s = cmd_argv_at(cmd, i);
-		ft_putstr_fd(s, 1);
-	}
+	i = print_til_last(cmd, i);
+	i = print_last(cmd, i);
 	if (print_n)
 		ft_putchar_fd('\n', 1);
-	//printf(YELLOW"exitCode: %d\n"RESET, 0);
 	env_save_exitcode(&app->env, EXIT_SUCCESS);
 	return (0);
 }
-
-

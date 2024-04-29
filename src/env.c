@@ -14,10 +14,10 @@
 
 void	env_save_exitcode(t_darr *env, int exitcode)
 {
-	int	i;
-	char *key;
-	char *record;
-	char *temp;
+	int		i;
+	char	*key;
+	char	*record;
+	char	*temp;
 
 	key = "?";
 	i = env_key_index(env, key, ft_strlen(key));
@@ -36,9 +36,9 @@ void	env_save_exitcode(t_darr *env, int exitcode)
 
 void	env_save_keyval(t_darr *env, char *key, char *val)
 {
-	int	i;
-	char *record;
-	char *temp;
+	int		i;
+	char	*record;
+	char	*temp;
 
 	i = env_key_index(env, key, ft_strlen(key));
 	temp = ft_strjoin(key, "=");
@@ -46,29 +46,33 @@ void	env_save_keyval(t_darr *env, char *key, char *val)
 	free(temp);
 	darray_append(env, record);
 	if (i > 0)
+	{
+		free(darray_get_at(env, i));
 		darray_del_at(env, i);
+	}
 }
 
 int	env_key_index(t_darr *env, char *key, int n)
 {
-	int	i;
+	int		i;
 	char	*rec;
 
 	i = 0;
 	while (i < env->count)
 	{
 		rec = darray_get_at(env, i);
-		if (!ft_strncmp(rec, key, n) && (*(rec + n) == '\0' || *(rec + n) == '='))
+		if (!ft_strncmp(rec, key, n) \
+			&& (*(rec + n) == '\0' || *(rec + n) == '='))
 			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-char *ft_get_env(t_darr *env, char *key)
+char	*ft_get_env(t_darr *env, char *key)
 {
-	int	i;
-	char *paths;
+	int		i;
+	char	*paths;
 
 	i = env_key_index(env, key, ft_strlen(key));
 	if (i < 0)

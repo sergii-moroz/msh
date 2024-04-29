@@ -54,7 +54,6 @@ int	ft_unset(t_cmd *cmd, t_app *app)
 	}
 	if (res > 0)
 		res = 1;
-	//printf(YELLOW"exitCode: %d\n"RESET, res);
 	env_save_exitcode(&app->env, res);
 	return (res);
 }

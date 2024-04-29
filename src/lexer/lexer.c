@@ -21,11 +21,11 @@ static void	lexer_init(char *s, t_lexer_data *data)
 		data->current_char = *s;
 }
 
-static void	skip_spaces(t_lexer_data *data)
-{
-	while (ft_isspace(data->current_char))
-		advance(data);
-}
+// static void	skip_spaces(t_lexer_data *data)
+// {
+// 	while (ft_isspace(data->current_char))
+// 		advance(data);
+// }
 
 void	advance(t_lexer_data *data)
 {

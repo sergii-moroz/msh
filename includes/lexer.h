@@ -50,7 +50,6 @@ typedef struct s_lexer_data
 
 //			lexer.c
 // static void		lexer_init(char *s, t_lexer_data *data);
-// static void		skip_spaces(t_lexer_data *data);
 // static t_token	*get_next_token(t_lexer_data *data);
 void		advance(t_lexer_data *data);
 t_list		*lexer(char *line);

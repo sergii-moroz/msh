@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:29:50 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/26 16:58:27 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/29 07:46:01 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	check_leaks()
-{
-	system("leaks minishell");
-}
+// static void	check_leaks()
+// {
+// 	system("leaks minishell");
+// }
 
 void	line_destroy(char *line)
 {
 	free(line);
-	rl_clear_history();
+	//rl_
+	clear_history();
 }
 
 void	handle_sigint(int num)
@@ -28,7 +29,7 @@ void	handle_sigint(int num)
 	(void)num;
 	ft_putstr_fd("\n", 1);
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_redisplay();
 }
 

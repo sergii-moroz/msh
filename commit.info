@@ -1,8 +1,17 @@
-cmd.c
-heredoc.c
-redirection.c
-app.c
+builtin.h
+lexer.h
+parser.h
 main.c
+builtin_utils.c
+cmd.c
+expander.c
+lexer.c
+parser.c
+ft_cd.c
+ft_echo.c
+ft_unset.c
+ft_exit.c
+env.c
 Makefile
 
-git commit -m "Bug fixing: cmd_clean(). Redirection module partial norminette."
+git commit -m "Turn on compilations flags. Norminette env and some builtin funcitons: echo, exit, unset, cd (partial)."

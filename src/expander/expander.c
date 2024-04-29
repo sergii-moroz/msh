@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 09:33:37 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/17 08:27:36 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/29 07:58:32 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,13 @@ void	expander(t_cmd *cmd, t_darr *envp)
 {
 	int	i;
 	t_darr	*argv;
-	char	*s;
+	// char	*s;
 
 	argv = &(cmd->argv);
 	i = 0;
 	while (i < argv->count)
 	{
-		s = cmd_argv_at(cmd, i);
+		// s = cmd_argv_at(cmd, i);
 		if (cmd_argtype_at(cmd, i) == WORD || cmd_argtype_at(cmd, i) == DQUOTE)
 		{
 			char *new = expand_argv(cmd_argv_at(cmd, i), envp);

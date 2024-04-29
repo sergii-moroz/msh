@@ -61,9 +61,9 @@ int	ft_isvalid_identifier(char *s)
 	return (1);
 }
 
-int	ft_putstrn_fd(char *s, int n, int fd)
+void	ft_putstrn_fd(char *s, int n, int fd)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (*(s + i) && i < n)

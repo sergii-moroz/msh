@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:56:48 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/17 12:49:37 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/29 07:55:04 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int		ft_char_index(char *s, int c);
 int		is_builtin(char *path_name);
 int		ft_isvalid_int(char *str);
 int		ft_isvalid_identifier(char *s);
-int		ft_putstrn_fd(char *s, int n, int fd);
+void	ft_putstrn_fd(char *s, int n, int fd);
 
 #endif

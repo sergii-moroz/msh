@@ -12,12 +12,12 @@
 
 #include "../includes/parser.h"
 
-static t_list	*parser_peek(t_parser_data *data)
-{
-	if (data->current_token)
-		return (data->current_token->next);
-	return (NULL);
-}
+// static t_list	*parser_peek(t_parser_data *data)
+// {
+// 	if (data->current_token)
+// 		return (data->current_token->next);
+// 	return (NULL);
+// }
 
 int	parser_peek_type(t_parser_data *data)
 {
