@@ -39,7 +39,7 @@ static int	cd_error(char *path, t_app *app)
 	perror(path);
 	ft_putstr_fd(RESET, 2);
 	env_save_exitcode(&app->env, EXIT_FAILURE);
-	// free(path);
+	free(path);
 	return (EXIT_FAILURE);
 }
 
@@ -61,7 +61,7 @@ int	ft_cd(t_cmd *cmd, t_app *app)
 	if (argv->count == 1)
 		path = ft_get_env(&app->env, "HOME");
 	else if (argv->count > 2)
-		cd_error_too_many(app);
+		return (cd_error_too_many(app));
 	else if (argv->count == 2)
 		path = cmd_argv_at(cmd, 1);
 	if (!ft_strlen(path))
@@ -75,6 +75,7 @@ int	ft_cd(t_cmd *cmd, t_app *app)
 	free(path);
 	free(app->path);
 	app->path = getcwd(NULL, 0);
+	free(app->msh_line);
 	app->msh_line = app_set_msh(app);
 	env_save_keyval(&app->env, "PWD", app->path);
 	env_save_exitcode(&app->env, EXIT_SUCCESS);
