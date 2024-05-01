@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:29:50 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/29 07:46:01 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/05/01 11:21:33 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,21 @@ int	main(int argc, char **argv, char **env)
 				break;
 			// ft_lstiter(app.tokens, token_print);
 			parser(app.tokens, &app);
+			t_cmd	*cmd;
+			int i;
+			i = 0;
+			while (i < app.cmds.count)
+			{
+				cmd = darray_get_at(&app.cmds, i);
+				expander(cmd, &app.env);
+				// if (!is_builtin(darray_get_first(&cmd->argv)))
+				{
+					cmd_join_strnum(cmd);
+					cmd_eat_spaces(cmd);
+				}
+				// cmd_print(cmd);
+				i++;
+			}
 			// parser_print_cmd(&app.cmds);
 			// if (app.parser_error)
 			// {

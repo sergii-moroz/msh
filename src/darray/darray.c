@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   darray.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:00:34 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/26 12:52:32 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/30 20:34:54 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,18 @@ void	darray_destroy(t_darr *darr)
 {
 	if (darr->content)
 		free(darr->content);
+}
+
+void	darray_clean(t_darr *darr)
+{
+	int	i;
+
+	i = 0;
+	while (i < darr->count)
+	{
+		// printf("free: i: %d, [%s]\n", i, (char *)darr->content[i]);
+		free(darr->content[i]);
+		i++;
+	}
+	free(darr->content);
 }

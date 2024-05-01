@@ -1,0 +1,6 @@
+{
+  ignore_pa
+  Memcheck:Cond
+  ...
+  obj:/usr/lib/libedit.3.dylib
+}

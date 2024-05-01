@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:53:28 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/29 09:09:21 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/30 21:07:20 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	ft_echo(t_cmd *cmd, t_app *app)
 
 	print_n = 1;
 	argv = &cmd->argv;
-	cmd_join_strnum(cmd);
-	cmd_eat_spaces(cmd);
+	// cmd_join_strnum(cmd);
+	// cmd_eat_spaces(cmd);
 	i = 1;
 	while (i < argv->count)
 	{

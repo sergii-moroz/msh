@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:53:28 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/18 14:00:34 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/30 21:12:09 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	ft_export_print_declare(char **envp)
 	i = 0;
 	while (envp && *(envp + i))
 	{
-		// TODO:	Sort env array
 		rec = *(envp + i);
 		eq_pos = ft_char_index(*(envp + i), '=');
 		ft_putstr_fd(BLACK"declare -x "RESET CYAN, 1);
@@ -53,19 +52,22 @@ static void	ft_export_print_declare(char **envp)
 	}
 }
 
+static int	export_error(char *s)
+{
+	ft_putstr_fd("-msh: "RED"export: '", 2);
+	ft_putstr_fd(s, 2);
+	ft_putendl_fd("': not a valid identifier"RESET, 2);
+	return (EXIT_FAILURE);
+}
+
 static int	ft_export_add_var(t_darr *env, char *s)
 {
 	int	pos;
 	int	key_len;
 	int	i;
 
-	if (!ft_isvalid_identifier(s)) // <- here i check only first character
-	{
-		ft_putstr_fd("-bash: "RED"export: '", 2);
-		ft_putstr_fd(s, 2);
-		ft_putendl_fd("': not a valid identifier"RESET, 2);
-		return (EXIT_FAILURE);
-	}
+	if (!ft_isvalid_identifier(s))
+		return (export_error(s));
 	else
 	{
 		pos = ft_char_index(s, '=');
@@ -81,8 +83,6 @@ static int	ft_export_add_var(t_darr *env, char *s)
 			darray_append(env, ft_strdup(s));
 			darray_del_at(env, i);
 		}
-		//printf(BLUE"env: changed\n"RESET);
-		//darray_print_string_row(env);
 		return (EXIT_SUCCESS);
 	}
 }
@@ -95,9 +95,8 @@ int	ft_export(t_cmd *cmd, t_app *app)
 	int		res;
 
 	argv = &cmd->argv;
-	cmd_join_strnum(cmd);
-	cmd_eat_spaces(cmd);
-	//darray_print_string_row(argv);
+	// cmd_join_strnum(cmd);
+	// cmd_eat_spaces(cmd);
 	if (argv->count == 1)
 		ft_export_print_declare((char **)app->env.content);
 	res = 0;
@@ -110,7 +109,6 @@ int	ft_export(t_cmd *cmd, t_app *app)
 	}
 	if (res > 0)
 		res = 1;
-	//printf(YELLOW"exitCode: %d\n"RESET, res);
 	env_save_exitcode(&app->env, res);
 	return (res);
 }

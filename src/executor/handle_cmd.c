@@ -18,9 +18,9 @@ static void	exec_general_cmd(t_cmd *cmd, t_app *app)
 	char	**argv;
 	char	**envp;
 
-	expander(cmd, &app->env);
-	cmd_join_strnum(cmd);
-	cmd_eat_spaces(cmd);
+	// expander(cmd, &app->env);
+	// cmd_join_strnum(cmd);
+	// cmd_eat_spaces(cmd);
 	handle_heredoc(cmd, app);
 	if (cmd->argv.count == 0)
 		exit(EXIT_SUCCESS);

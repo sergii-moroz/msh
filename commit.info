@@ -1,17 +1,21 @@
-builtin.h
-lexer.h
-parser.h
+cmd.h
+darray.h
+expander.h
 main.c
-builtin_utils.c
-cmd.c
-expander.c
-lexer.c
-parser.c
 ft_cd.c
 ft_echo.c
-ft_unset.c
 ft_exit.c
-env.c
+ft_export.c
+ft_unset.c
+cmd_get.c
+cmd.c
+darray.c
+executor.c
+handle_cmd.c
+expander_utils.c
+expander.c
+lexer_token.c
+parser.c
 Makefile
 
-git commit -m "Turn on compilations flags. Norminette env and some builtin funcitons: echo, exit, unset, cd (partial)."
+git commit -m "Move expander block from executor block to the main function. Leaks check. Remove expander from builtins"

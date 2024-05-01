@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor_new.c                                     :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smoroz <smoroz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:41:04 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/18 15:53:53 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/30 19:12:51 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	exec_builtin(t_cmd *cmd, t_app *app)
 	int		out;
 
 	save_inout(&in, &out);
-	expander(cmd, &app->env);
+	// expander(cmd, &app->env);
 	handle_heredoc(cmd, app);
 	ft_handle_redirection(cmd);
 	cmd_name = cmd_argv_at(cmd, 0);

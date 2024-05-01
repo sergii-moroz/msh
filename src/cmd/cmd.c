@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 21:09:24 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/29 07:49:06 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/30 19:39:23 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void	cmd_init(t_cmd *cmd)
 
 void	cmd_destroy(t_cmd	*cmd)
 {
-	darray_destroy(&(cmd->argv));
-	darray_destroy(&(cmd->argvtype));
+	darray_clean(&(cmd->argv));
+	// darray_clean(&(cmd->redir));
+	// darray_destroy(&(cmd->argv));
 	darray_destroy(&(cmd->redir));
+	darray_destroy(&(cmd->argvtype));
 	free(&(cmd->path));
 }
 

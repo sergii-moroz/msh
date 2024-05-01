@@ -4,8 +4,8 @@ LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
 CFLAGS =	-Wall -Wextra -Werror -g
+CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
 MAKE	=	make
 RM		=	rm -rf
 
@@ -28,7 +28,7 @@ SRC		=	main.c \
 			executor.c executor_utils.c executor_child.c \
 			handle_cmd.c \
 			builtin_utils.c ft_pwd.c ft_env.c ft_cd.c ft_exit.c ft_export.c ft_unset.c ft_echo.c \
-			expander.c \
+			expander.c expander_utils.c \
 			redirection.c heredoc.c
 #			envp.c envl.c envl_utils.c envl_utils2.c \
 			executor.c \
@@ -71,7 +71,8 @@ test:
 			echo $(OBJ)
 
 val1:		all
-			valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./minishell
-
+			valgrind --leak-check=full --show-leak-kinds=definite,indirect,possible ./minishell
+#--suppressions=suppress.val ./minishell
+#--trace-children=yes --gen-suppressions=yes
 #--show-reachable=yes
 .PHONY: all clean fclean re val test

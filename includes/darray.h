@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:58:06 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/16 19:59:32 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/04/30 09:07:03 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_darr
 void	darray_init(t_darr *darr);
 void	darray_append(t_darr *darr, void *content);
 void	darray_destroy(t_darr *darr);
+void	darray_clean(t_darr *darr);
 
 //		darray_del.c
 void	darray_del_at(t_darr *darr, int i);
