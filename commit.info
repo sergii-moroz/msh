@@ -1,21 +1,11 @@
-cmd.h
-darray.h
-expander.h
-main.c
-ft_cd.c
-ft_echo.c
-ft_exit.c
-ft_export.c
 ft_unset.c
-cmd_get.c
-cmd.c
-darray.c
-executor.c
-handle_cmd.c
-expander_utils.c
 expander.c
-lexer_token.c
-parser.c
-Makefile
+expander_utils.c
+cmd.c
+cmd_utils.c
+expander.c
+expander_utils.c
+parser_utils_2.c
+main.c
 
-git commit -m "Move expander block from executor block to the main function. Leaks check. Remove expander from builtins"
+git comit -m "make cmd argv and redir independent from tokiens. cmd argv and redir use dynamic allocated memory. fixed memory leak in builtin unset"

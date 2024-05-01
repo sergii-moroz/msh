@@ -29,7 +29,10 @@ static int	ft_unset_del_var(t_darr *env, char *s)
 		key_len = ft_strlen(s);
 		i = env_key_index(env, s, key_len);
 		if (i > 0)
+		{
+			free(env->content[i]);
 			darray_del_at(env, i);
+		}
 		return (EXIT_SUCCESS);
 	}
 }

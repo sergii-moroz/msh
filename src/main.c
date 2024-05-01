@@ -58,6 +58,7 @@ int	main(int argc, char **argv, char **env)
 				break;
 			// ft_lstiter(app.tokens, token_print);
 			parser(app.tokens, &app);
+
 			t_cmd	*cmd;
 			int i;
 			i = 0;
@@ -65,14 +66,12 @@ int	main(int argc, char **argv, char **env)
 			{
 				cmd = darray_get_at(&app.cmds, i);
 				expander(cmd, &app.env);
-				// if (!is_builtin(darray_get_first(&cmd->argv)))
-				{
-					cmd_join_strnum(cmd);
-					cmd_eat_spaces(cmd);
-				}
-				// cmd_print(cmd);
+				cmd_join_strnum(cmd);
+				cmd_eat_spaces(cmd);
+				//cmd_print(cmd);
 				i++;
 			}
+
 			// parser_print_cmd(&app.cmds);
 			// if (app.parser_error)
 			// {

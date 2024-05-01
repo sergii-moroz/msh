@@ -22,9 +22,9 @@ void	cmd_init(t_cmd *cmd)
 void	cmd_destroy(t_cmd	*cmd)
 {
 	darray_clean(&(cmd->argv));
-	// darray_clean(&(cmd->redir));
+	darray_clean(&(cmd->redir));
 	// darray_destroy(&(cmd->argv));
-	darray_destroy(&(cmd->redir));
+	//darray_destroy(&(cmd->redir));
 	darray_destroy(&(cmd->argvtype));
 	free(&(cmd->path));
 }

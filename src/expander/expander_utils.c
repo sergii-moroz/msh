@@ -34,7 +34,7 @@ char	*handle_var(char *src, char *dest, t_darr *envp, int *start, int *i)
 	(*i)++;
 	*start = *i;
 	j = 0;
-	while ((src + *i + j) && ft_isalnum(*(src + *i + j)))
+	while (src && ft_isalnum(*(src + *i + j))) //(src + *i + j) &&
 		j++;
 	key = ft_substr(src, *i, j);
 	val = ft_get_env(envp, key);

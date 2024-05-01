@@ -27,7 +27,7 @@ void	handle_redir(t_cmd **cmd, char *value, t_parser_data *data, t_app *app)
 {
 	t_token	*token;
 
-	cmd_append_redir(*cmd, value);
+	cmd_append_redir(*cmd, ft_strdup(value));
 	if (parser_peek_type(data) == SPACES)
 		parser_advance(data);
 	if (parser_peek_type(data) == WORD \
@@ -37,7 +37,7 @@ void	handle_redir(t_cmd **cmd, char *value, t_parser_data *data, t_app *app)
 	{
 		parser_advance(data);
 		token = data->current_token->content;
-		cmd_append_redir(*cmd, token->value);
+		cmd_append_redir(*cmd, ft_strdup(token->value));
 	}
 	else
 	{
@@ -48,6 +48,6 @@ void	handle_redir(t_cmd **cmd, char *value, t_parser_data *data, t_app *app)
 
 void	parser_handle_argv(t_cmd **cmd, t_token *token)
 {
-	cmd_append_argv(*cmd, token->value);
+	cmd_append_argv(*cmd, ft_strdup(token->value));
 	cmd_append_argvtype(*cmd, &(token->type));
 }

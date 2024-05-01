@@ -26,6 +26,7 @@ void	cmd_eat_spaces(t_cmd *cmd)
 		if (*(int *)darray_get_at(type, i) == SPACES \
 			|| ft_strlen(darray_get_at(argv, i)) == 0)
 		{
+			free(darray_get_at(argv, i));
 			darray_del_at(argv, i);
 			darray_del_at(type, i);
 		}
@@ -55,6 +56,7 @@ static void	cmd_join_helper(t_cmd *cmd, int i, int *prev_type)
 	argv->content[i - 1] = tmp;
 	*(int *)type->content[i - 1] = WORD;
 	*prev_type = WORD;
+	free(darray_get_at(argv, i));
 	darray_del_at(argv, i);
 	darray_del_at(type, i);
 }

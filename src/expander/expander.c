@@ -47,14 +47,14 @@ char	*copy_val(char *dest, char *val)
 
 char	*expand_argv(char *s, t_darr *envp)
 {
-	int		i; 
+	int		i;
 	int		start;
 	char	*line;
 
 	line = NULL;
 	start = 0;
 	i = 0;
-	while ((s + i) && *(s + i))
+	while (s && *(s + i))
 	{
 		if (*(s + i) == '$' && ft_isalpha(*(s + i + 1)))
 			line = handle_var(s, line, envp, &start, &i);
@@ -85,6 +85,12 @@ void	expander(t_cmd *cmd, t_darr *envp)
 			// have to add to token list; or got through argv and free all that not NULL;
 			cmd_set_argtype_at(cmd, i, WORD);
 		}
+		// else if (cmd_argtype_at(cmd, i) == QUOTE)
+		// {
+		// 	new = ft_strdup(cmd_argv_at(cmd, i));
+		// 	cmd_set_argv_at(cmd, i, new);
+		// 	cmd_set_argtype_at(cmd, i, WORD);
+		// }
 		i++;
 	}
 }

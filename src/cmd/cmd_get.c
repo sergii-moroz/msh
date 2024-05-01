@@ -37,5 +37,6 @@ void	cmd_set_argv_at(t_cmd *cmd, int i, void *s)
 	t_darr	*argv;
 
 	argv = &(cmd->argv);
+	free(cmd_argv_at(cmd, i));
 	*(argv->content + i) = s;
 }
