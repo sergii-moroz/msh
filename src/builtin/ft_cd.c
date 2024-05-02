@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:53:28 by smoroz            #+#    #+#             */
-/*   Updated: 2024/04/30 21:09:08 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/05/02 14:54:07 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static int	cd_error(char *path, t_app *app)
 	return (EXIT_FAILURE);
 }
 
-static int	cd_error_too_many(t_app *app)
-{
-	ft_putendl_fd(BLACK "-msh:"RED" cd: too many arguments"RESET, 2);
-	env_save_exitcode(&app->env, EXIT_FAILURE);
-	return (EXIT_FAILURE);
-}
+// static int	cd_error_too_many(t_app *app)
+// {
+// 	ft_putendl_fd(BLACK "-msh:"RED" cd: too many arguments"RESET, 2);
+// 	env_save_exitcode(&app->env, EXIT_FAILURE);
+// 	return (EXIT_FAILURE);
+// }
 
 int	ft_cd(t_cmd *cmd, t_app *app)
 {
@@ -60,9 +60,9 @@ int	ft_cd(t_cmd *cmd, t_app *app)
 	// cmd_eat_spaces(cmd);
 	if (argv->count == 1)
 		path = ft_get_env(&app->env, "HOME");
-	else if (argv->count > 2)
-		return (cd_error_too_many(app));
-	else if (argv->count == 2)
+	//else if (argv->count > 2)
+	//	return (cd_error_too_many(app));
+	else if (argv->count >= 2)
 		path = cmd_argv_at(cmd, 1);
 	if (!ft_strlen(path))
 	{

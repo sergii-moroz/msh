@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:29:50 by smoroz            #+#    #+#             */
-/*   Updated: 2024/05/01 11:21:33 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/05/02 16:42:56 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@
 void	line_destroy(char *line)
 {
 	free(line);
-	//rl_
-	clear_history();
+	rl_clear_history();
 }
 
 void	handle_sigint(int num)
 {
 	(void)num;
-	ft_putstr_fd("\n", 1);
+	//ft_putstr_fd("\b\b\033[K\n", 1);
+	ft_putstr_fd("\033[s", 1);
+	ft_putstr_fd("\033[u \n", 1);
+	//ft_putstr_fd("\033[u\033[K\n", 1);
+	//ft_putstr_fd("\033[10C\b\b\033[K\n", 1);
+	rl_replace_line("", 0);
 	rl_on_new_line();
-	//rl_replace_line("", 0);
 	rl_redisplay();
 }
 
