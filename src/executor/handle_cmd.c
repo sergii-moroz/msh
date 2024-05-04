@@ -17,19 +17,7 @@ static void	exec_general_cmd(t_cmd *cmd, t_app *app)
 	char	*env_paths;
 	char	**argv;
 	char	**envp;
-	//struct stat	buf;
 
-	// expander(cmd, &app->env);
-	// cmd_join_strnum(cmd);
-	// cmd_eat_spaces(cmd);
-	/*lstat(cmd_argv_at(cmd, 0), &buf);
-	if (S_ISDIR(buf.st_mode))
-	{
-		ft_putstr_fd(BLACK"-msh: "RESET RED, 2);
-		ft_putstr_fd(cmd_argv_at(cmd, 0), 2);
-		ft_putstr_fd(": is a directory\n"RESET, 2);
-		exit(126);
-	}*/
 	handle_heredoc(cmd, app);
 	if (cmd->argv.count == 0)
 		exit(EXIT_SUCCESS);
@@ -98,3 +86,17 @@ void	ft_clean_split(char **split)
 	free(split);
 	split = NULL;
 }
+
+	//struct stat	buf;
+
+	// expander(cmd, &app->env);
+	// cmd_join_strnum(cmd);
+	// cmd_eat_spaces(cmd);
+	/*lstat(cmd_argv_at(cmd, 0), &buf);
+	if (S_ISDIR(buf.st_mode))
+	{
+		ft_putstr_fd(BLACK"-msh: "RESET RED, 2);
+		ft_putstr_fd(cmd_argv_at(cmd, 0), 2);
+		ft_putstr_fd(": is a directory\n"RESET, 2);
+		exit(126);
+	}*/

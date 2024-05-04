@@ -36,7 +36,6 @@ void	exec_builtin(t_cmd *cmd, t_app *app)
 	int		out;
 
 	save_inout(&in, &out);
-	// expander(cmd, &app->env);
 	handle_heredoc(cmd, app);
 	ft_handle_redirection(cmd);
 	cmd_name = cmd_argv_at(cmd, 0);

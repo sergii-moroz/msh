@@ -45,8 +45,6 @@ int	ft_unset(t_cmd *cmd, t_app *app)
 	int		res;
 
 	argv = &cmd->argv;
-	// cmd_join_strnum(cmd);
-	// cmd_eat_spaces(cmd);
 	res = 0;
 	i = 1;
 	while (i < argv->count)

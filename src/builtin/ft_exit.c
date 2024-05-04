@@ -39,8 +39,6 @@ int	ft_exit(t_cmd *cmd, t_app *app)
 	int		exit_code;
 
 	argv = &(cmd->argv);
-	// cmd_join_strnum(cmd);
-	// cmd_eat_spaces(cmd);
 	if (argv->count == 1)
 	{
 		ft_putendl_fd("exit", 2);

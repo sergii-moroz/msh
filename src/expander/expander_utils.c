@@ -12,35 +12,51 @@
 
 #include "../includes/expander.h"
 
-char	*handle_qmark(char *src, char *dest, t_darr *envp, int *start, int *i)
+char	*handle_qmark(char *src, char *dest, t_darr *envp, t_edata *edata)
 {
 	char	*val;
 
-	dest = copy_before(src, dest, *start, *i - *start);
+	dest = copy_before(src, dest, edata->start, edata->i - edata->start);
 	val = ft_get_env(envp, "?");
 	dest = copy_val(dest, val);
-	*i += 2;
-	*start = *i;
+	edata->i += 2;
+	edata->start = edata->i;
 	return (dest);
 }
 
-char	*handle_var(char *src, char *dest, t_darr *envp, int *start, int *i)
+char	*handle_var(char *src, char *dest, t_darr *envp, t_edata *edata)
 {
 	char	*val;
 	char	*key;
 	int		j;
 
-	dest = copy_before(src, dest, *start, *i - *start);
-	(*i)++;
-	*start = *i;
+	dest = copy_before(src, dest, edata->start, edata->i - edata->start);
+	(edata->i)++;
+	edata->start = edata->i;
 	j = 0;
-	while (src && ft_isalnum(*(src + *i + j))) //(src + *i + j) &&
+	while (src && ft_isalnum(*(src + edata->i + j)))
 		j++;
-	key = ft_substr(src, *i, j);
+	key = ft_substr(src, edata->i, j);
 	val = ft_get_env(envp, key);
 	free(key);
 	dest = copy_val(dest, val);
-	*i += j;
-	*start = *i;
+	edata->i += j;
+	edata->start = edata->i;
 	return (dest);
+}
+
+void	expander_wrapper(t_darr *cmds, t_darr *env)
+{
+	t_cmd	*cmd;
+	int		i;
+
+	i = 0;
+	while (i < cmds->count)
+	{
+		cmd = darray_get_at(cmds, i);
+		expander(cmd, env);
+		cmd_join_strnum(cmd);
+		cmd_eat_spaces(cmd);
+		i++;
+	}
 }

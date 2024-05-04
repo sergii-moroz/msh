@@ -43,7 +43,6 @@ static void	app_copy_env(char **env, t_app *app)
 		i++;
 	}
 	darray_append(&app->env, ft_strdup("?=0"));
-	//darray_append(&app->env, ft_strdup("$=0"));
 }
 
 void	app_init(t_app *app, char **env)
@@ -58,23 +57,11 @@ void	app_init(t_app *app, char **env)
 	darray_init(&app->cmds);
 }
 
-/*int	app_env_update(t_list *envl, char *key, char *value)
-{
-	if (!value)
-		ft_envl_del_record(&envl, key);
-	else
-		ft_envl_add_record(&envl, key, value);
-	return (1);
-}*/
-
 int	app_destroy(t_app *app)
 {
-	//ft_lstclear(&(app->envl), ft_envl_del);
-	//rl_clear_history();
 	free(app->path);
 	free(app->msh_line);
 	darray_del_all(&app->env);
 	ft_lstclear(&(app->tokens), token_destroy);
-	// here destroy app->cmds
 	return (1);
 }

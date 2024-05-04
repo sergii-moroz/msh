@@ -30,7 +30,6 @@ t_token	*token_new(char *s, int type)
 void	token_destroy(void *token)
 {
 	free(((t_token *)token)->value);
-	// ((t_token *)token)->value = NULL;
 	free(token);
 }
 

@@ -71,15 +71,13 @@ static void	hpipe(t_darr *hdoc)
 	waitpid(hpid, NULL, 0);
 }
 
-void	handle_heredoc(t_cmd *cmd, t_app *app)
+static t_darr	get_input_from_hdoc(t_cmd *cmd, t_app *app)
 {
-	t_darr	*redir;
 	int		i;
 	char	*end;
 	t_darr	hdoc;
-	int		oldout;
+	t_darr	*redir;
 
-	oldout = dup(1);
 	darray_init(&hdoc);
 	redir = &cmd->redir;
 	i = 0;
@@ -97,6 +95,16 @@ void	handle_heredoc(t_cmd *cmd, t_app *app)
 		}
 		i++;
 	}
+	return (hdoc);
+}
+
+void	handle_heredoc(t_cmd *cmd, t_app *app)
+{
+	t_darr	hdoc;
+	int		oldout;
+
+	oldout = dup(1);
+	hdoc = get_input_from_hdoc(cmd, app);
 	if (hdoc.count > 0)
 	{
 		dup2(oldout, 1);

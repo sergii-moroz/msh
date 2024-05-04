@@ -56,12 +56,8 @@ int	ft_cd(t_cmd *cmd, t_app *app)
 	char	*path;
 
 	argv = &cmd->argv;
-	// cmd_join_strnum(cmd);
-	// cmd_eat_spaces(cmd);
 	if (argv->count == 1)
 		path = ft_get_env(&app->env, "HOME");
-	//else if (argv->count > 2)
-	//	return (cd_error_too_many(app));
 	else if (argv->count >= 2)
 		path = cmd_argv_at(cmd, 1);
 	if (!ft_strlen(path))

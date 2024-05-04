@@ -63,8 +63,6 @@ int	ft_echo(t_cmd *cmd, t_app *app)
 
 	print_n = 1;
 	argv = &cmd->argv;
-	// cmd_join_strnum(cmd);
-	// cmd_eat_spaces(cmd);
 	i = 1;
 	while (i < argv->count)
 	{

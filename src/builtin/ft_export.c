@@ -95,8 +95,6 @@ int	ft_export(t_cmd *cmd, t_app *app)
 	int		res;
 
 	argv = &cmd->argv;
-	// cmd_join_strnum(cmd);
-	// cmd_eat_spaces(cmd);
 	if (argv->count == 1)
 		ft_export_print_declare((char **)app->env.content);
 	res = 0;

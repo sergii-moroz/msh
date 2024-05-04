@@ -1,12 +1,19 @@
-app.h
-minishell.h
-msh_signals.h
-redirection.h
-app.c
-main.c
-ft_cd.c
-heredoc.c
-signals.c
-Makefile
+		modified:   Makefile
+        modified:   includes/expander.h
+        modified:   src/app.c
+        modified:   src/builtin/ft_cd.c
+        modified:   src/builtin/ft_echo.c
+        modified:   src/builtin/ft_exit.c
+        modified:   src/builtin/ft_export.c
+        modified:   src/builtin/ft_unset.c
+        modified:   src/cmd/cmd.c
+        modified:   src/darray/darray.c
+        modified:   src/executor/executor.c
+        modified:   src/executor/handle_cmd.c
+        modified:   src/expander/expander.c
+        modified:   src/expander/expander_utils.c
+        modified:   src/lexer/lexer_token.c
+        modified:   src/main.c
+        modified:   src/redirection/heredoc.c
 
-git comit -m "rewrite app_set_msh() to use char pointer. handle sigint in interactive mode"
+git commit -m "norminette all files. Rewritten expander."

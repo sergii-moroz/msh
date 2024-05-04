@@ -66,7 +66,6 @@ void	darray_clean(t_darr *darr)
 	i = 0;
 	while (i < darr->count)
 	{
-		// printf("free: i: %d, [%s]\n", i, (char *)darr->content[i]);
 		free(darr->content[i]);
 		i++;
 	}

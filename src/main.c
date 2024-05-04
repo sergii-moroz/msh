@@ -25,6 +25,19 @@ void	line_destroy(char *line)
 	rl_clear_history();
 }
 
+void	app_helper(char *line, t_app *app)
+{
+	signal_noninteractive();
+	add_history(line);
+	app->tokens = lexer(line);
+	if (app->tokens == NULL)
+		return ;
+	// ft_lstiter(app.tokens, token_print);
+	parser(app->tokens, app);
+	expander_wrapper(&app->cmds, &app->env);
+	executor(app);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
@@ -39,38 +52,9 @@ int	main(int argc, char **argv, char **env)
 		signal_interactive();
 		line = readline(app.msh_line);
 		if (!line)
-			break;
+			break ;
 		if (*line)
-		{
-			signal_noninteractive();
-			add_history(line);
-			app.tokens = lexer(line);
-			if (app.tokens == NULL)
-				break;
-			// ft_lstiter(app.tokens, token_print);
-			parser(app.tokens, &app);
-
-			t_cmd	*cmd;
-			int i;
-			i = 0;
-			while (i < app.cmds.count)
-			{
-				cmd = darray_get_at(&app.cmds, i);
-				expander(cmd, &app.env);
-				cmd_join_strnum(cmd);
-				cmd_eat_spaces(cmd);
-				//cmd_print(cmd);
-				i++;
-			}
-
-			// parser_print_cmd(&app.cmds);
-			// if (app.parser_error)
-			// {
-			// 	app.parser_error = 0;
-			// 	continue;
-			// }
-			executor(&app);
-		}
+			app_helper(line, &app);
 		free(line);
 		ft_lstclear(&app.tokens, token_destroy);
 		cmd_clean(&app);

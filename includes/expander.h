@@ -27,13 +27,20 @@
 // 	char	current_char;
 // }			t_exp_data;
 
+typedef struct	s_edata
+{
+	int	i;
+	int	start;
+}		t_edata;
+
 //		expander.c
 char	*copy_before(char *src, char *dest, int start, int len);
 char	*copy_val(char *dest, char *val);
 void	expander(t_cmd *cmd, t_darr *env);
 
 //		expander_utils.c
-char	*handle_qmark(char *src, char *dest, t_darr *envp, int *start, int *i);
-char	*handle_var(char *src, char *dest, t_darr *envp, int *start, int *i);
+char	*handle_qmark(char *src, char *dest, t_darr *envp, t_edata *edata);
+char	*handle_var(char *src, char *dest, t_darr *envp, t_edata *edata);
+void	expander_wrapper(t_darr *cmds, t_darr *env);
 
 #endif
