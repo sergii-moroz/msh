@@ -12,6 +12,8 @@
 
 #include "../includes/minishell.h"
 
+int	g_code = 0;
+
 // static void	check_leaks()
 // {
 // 	system("leaks minishell");
@@ -23,38 +25,24 @@ void	line_destroy(char *line)
 	rl_clear_history();
 }
 
-void	handle_sigint(int num)
-{
-	(void)num;
-	//ft_putstr_fd("\b\b\033[K\n", 1);
-	ft_putstr_fd("\033[s", 1);
-	ft_putstr_fd("\033[u \n", 1);
-	//ft_putstr_fd("\033[u\033[K\n", 1);
-	//ft_putstr_fd("\033[10C\b\b\033[K\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
-#include <signal.h>
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_app	app;
 
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
 	// atexit(check_leaks);
 	(void)argc;
 	line = *argv;
 	app_init(&app, env);
 	while (1)
 	{
+		signal_interactive();
 		line = readline(app.msh_line);
 		if (!line)
 			break;
 		if (*line)
 		{
+			signal_noninteractive();
 			add_history(line);
 			app.tokens = lexer(line);
 			if (app.tokens == NULL)

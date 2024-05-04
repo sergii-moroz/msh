@@ -12,13 +12,13 @@
 
 #include "../includes/app.h"
 
-char	*app_set_msh(t_app *app)
+char	*app_set_msh(char *path)
 {
 	char	*tmp;
 	char	*msh;
 	char	*p;
 
-	p = app->path;
+	p = path;
 	while (p && *p)
 	{
 		if (*p == '/')
@@ -52,7 +52,7 @@ void	app_init(t_app *app, char **env)
 	app->tokens = NULL;
 	app->had_error = FALSE;
 	app->path = getcwd(NULL, 0);
-	app->msh_line = app_set_msh(app);
+	app->msh_line = app_set_msh(app->path);
 	app->in = dup(0);
 	app->out = dup(1);
 	darray_init(&app->cmds);

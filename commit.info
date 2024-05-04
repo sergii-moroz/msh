@@ -1,3 +1,12 @@
+app.h
+minishell.h
+msh_signals.h
+redirection.h
+app.c
+main.c
 ft_cd.c
+heredoc.c
+signals.c
+Makefile
 
-git comit -m "fixed memory leaks at function cd"
+git comit -m "rewrite app_set_msh() to use char pointer. handle sigint in interactive mode"

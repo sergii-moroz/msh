@@ -32,8 +32,9 @@ static t_darr	heredoc_read(char *end)
 	darray_init(&hdoc);
 	while (1)
 	{
+		signal_interactive_hdoc();
 		line = readline(BLUE"heredoc"ARROW RESET);
-		if (!ft_strncmp(line, end, ft_strlen(end) + 1))
+		if (!line || !ft_strncmp(line, end, ft_strlen(end) + 1))
 		{
 			free(line);
 			return (hdoc);
@@ -78,8 +79,6 @@ void	handle_heredoc(t_cmd *cmd, t_app *app)
 	t_darr	hdoc;
 	int		oldout;
 
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	oldout = dup(1);
 	darray_init(&hdoc);
 	redir = &cmd->redir;

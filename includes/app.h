@@ -36,6 +36,6 @@ typedef struct s_app
 
 void	app_init(t_app *app, char **envp);
 int		app_destroy(t_app *app);
-char	*app_set_msh(t_app *app);
+char	*app_set_msh(char *path);
 
 #endif

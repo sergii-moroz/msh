@@ -4,8 +4,8 @@ LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 CC		=	cc
-CFLAGS =	-Wall -Wextra -Werror -g
 CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror -g
 MAKE	=	make
 RM		=	rm -rf
 
@@ -13,7 +13,7 @@ LIB		=	-lreadline -lft -L$(LIBFT_DIR)
 INC		=	-I includes
 
 SRC_DIRS	=	src/lexer src src/darray src/cmd \
-				src/parser src/executor src/envp \
+				src/parser src/executor src/envp src/signals \
 				src/expander src/builtin src/redirection
 vpath		%.c $(SRC_DIRS)
 
@@ -29,7 +29,8 @@ SRC		=	main.c \
 			handle_cmd.c \
 			builtin_utils.c ft_pwd.c ft_env.c ft_cd.c ft_exit.c ft_export.c ft_unset.c ft_echo.c \
 			expander.c expander_utils.c \
-			redirection.c heredoc.c
+			redirection.c heredoc.c \
+			signals.c
 #			envp.c envl.c envl_utils.c envl_utils2.c \
 			executor.c \
 			builtin1.c builtin_utils.c \

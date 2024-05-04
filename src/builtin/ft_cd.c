@@ -76,7 +76,7 @@ int	ft_cd(t_cmd *cmd, t_app *app)
 	free(app->path);
 	app->path = getcwd(NULL, 0);
 	free(app->msh_line);
-	app->msh_line = app_set_msh(app);
+	app->msh_line = app_set_msh(app->path);
 	env_save_keyval(&app->env, "PWD", app->path);
 	env_save_exitcode(&app->env, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
