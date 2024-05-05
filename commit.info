@@ -1,19 +1,12 @@
-		modified:   Makefile
+        modified:   Makefile
+        modified:   includes/app.h
+        modified:   includes/builtin.h
+        modified:   includes/colors.h
         modified:   includes/expander.h
-        modified:   src/app.c
-        modified:   src/builtin/ft_cd.c
-        modified:   src/builtin/ft_echo.c
-        modified:   src/builtin/ft_exit.c
-        modified:   src/builtin/ft_export.c
-        modified:   src/builtin/ft_unset.c
-        modified:   src/cmd/cmd.c
-        modified:   src/darray/darray.c
-        modified:   src/executor/executor.c
-        modified:   src/executor/handle_cmd.c
-        modified:   src/expander/expander.c
-        modified:   src/expander/expander_utils.c
-        modified:   src/lexer/lexer_token.c
+        modified:   includes/minishell.h
+        modified:   includes/msh_signals.h
         modified:   src/main.c
         modified:   src/redirection/heredoc.c
+        modified:   src/signals/signals.c
 
-git commit -m "norminette all files. Rewritten expander."
+git commit -m "handle signal 130. Norminette all  files"

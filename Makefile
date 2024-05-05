@@ -5,8 +5,8 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 
 CC		=	cc
 CFLAGS =
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
 CFLAGS =	-Wall -Wextra -Werror -g
+CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
 MAKE	=	make
 RM		=	rm -rf
 

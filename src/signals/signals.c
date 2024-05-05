@@ -12,6 +12,8 @@
 
 #include "../includes/msh_signals.h"
 
+int	g_code;
+
 static void	handle_sigint(int num)
 {
 	char	*tmp;
@@ -31,6 +33,7 @@ static void	handle_sigint(int num)
 
 void	signal_interactive(void)
 {
+	g_code = 0;
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }

@@ -12,8 +12,6 @@
 
 #include "../includes/minishell.h"
 
-int	g_code = 0;
-
 // static void	check_leaks()
 // {
 // 	system("leaks minishell");
@@ -32,18 +30,17 @@ void	app_helper(char *line, t_app *app)
 	app->tokens = lexer(line);
 	if (app->tokens == NULL)
 		return ;
-	// ft_lstiter(app.tokens, token_print);
 	parser(app->tokens, app);
 	expander_wrapper(&app->cmds, &app->env);
 	executor(app);
 }
+// ft_lstiter(app.tokens, token_print);
 
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_app	app;
 
-	// atexit(check_leaks);
 	(void)argc;
 	line = *argv;
 	app_init(&app, env);
@@ -52,7 +49,10 @@ int	main(int argc, char **argv, char **env)
 		signal_interactive();
 		line = readline(app.msh_line);
 		if (!line)
+		{
+			g_code = 130;
 			break ;
+		}
 		if (*line)
 			app_helper(line, &app);
 		free(line);
@@ -61,5 +61,6 @@ int	main(int argc, char **argv, char **env)
 	}
 	line_destroy(line);
 	app_destroy(&app);
-	return (EXIT_SUCCESS);
+	return (g_code);
 }
+	// atexit(check_leaks);

@@ -19,15 +19,7 @@
 # include "executor.h"
 # include "../libft/libft.h"
 
-// typedef struct s_exp_data
-// {
-// 	char	*s;
-// 	int		i;
-// 	int		start;
-// 	char	current_char;
-// }			t_exp_data;
-
-typedef struct	s_edata
+typedef struct s_edata
 {
 	int	i;
 	int	start;

@@ -23,7 +23,7 @@
 # include "expander.h"
 # include "../libft/libft.h"
 
-int		ft_pwd(t_app * app);
+int		ft_pwd(t_app *app);
 int		ft_env(char **env);
 int		ft_cd(t_cmd *cmd, t_app *app);
 int		ft_echo(t_cmd *cmd, t_app *app);

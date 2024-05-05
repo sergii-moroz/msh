@@ -18,6 +18,8 @@
 # include "app.h"
 # include "../libft/libft.h"
 
+extern int	g_code;
+
 void	signal_interactive(void);
 void	signal_noninteractive(void);
 void	signal_interactive_hdoc(void);

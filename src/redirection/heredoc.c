@@ -36,6 +36,8 @@ static t_darr	heredoc_read(char *end)
 		line = readline(BLUE"heredoc"ARROW RESET);
 		if (!line || !ft_strncmp(line, end, ft_strlen(end) + 1))
 		{
+			if (!line)
+				g_code = 130;
 			free(line);
 			return (hdoc);
 		}
@@ -69,6 +71,7 @@ static void	hpipe(t_darr *hdoc)
 	close(hfd[0]);
 	close(hfd[1]);
 	waitpid(hpid, NULL, 0);
+	darray_del_all(hdoc);
 }
 
 static t_darr	get_input_from_hdoc(t_cmd *cmd, t_app *app)
@@ -105,6 +108,12 @@ void	handle_heredoc(t_cmd *cmd, t_app *app)
 
 	oldout = dup(1);
 	hdoc = get_input_from_hdoc(cmd, app);
+	if (g_code != 0)
+	{
+		if (hdoc.count > 0)
+			darray_del_all(&hdoc);
+		exit(g_code);
+	}
 	if (hdoc.count > 0)
 	{
 		dup2(oldout, 1);

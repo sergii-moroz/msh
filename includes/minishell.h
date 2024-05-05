@@ -19,21 +19,11 @@
 # include <readline/history.h>
 # include <errno.h>
 
+# include "msh_signals.h"
 # include "app.h"
 # include "lexer.h"
 # include "parser.h"
 # include "executor.h"
-# include "msh_signals.h"
 # include "../libft/libft.h"
-
-/*
-# include "envp.h"
-# include "darray.h"
-# include "cmd.h"
-# include "parser.h"
-
-# define TRUE		1
-# define FALSE		0
-*/
 
 #endif

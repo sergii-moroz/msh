@@ -31,8 +31,8 @@ typedef struct s_app
 	int		out;
 }			t_app;
 
-#define MSH BLACK"msh "RESET
-#define ARROW BLACK" » "RESET
+# define MSH "\033[1;30mmsh \033[0m"
+# define ARROW "\033[1;30m » \033[0m"
 
 void	app_init(t_app *app, char **envp);
 int		app_destroy(t_app *app);
