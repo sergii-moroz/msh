@@ -58,6 +58,7 @@ int	main(int argc, char **argv, char **env)
 		free(line);
 		ft_lstclear(&app.tokens, token_destroy);
 		cmd_clean(&app);
+		app.had_error = FALSE;
 	}
 	line_destroy(line);
 	app_destroy(&app);

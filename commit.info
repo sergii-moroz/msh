@@ -1,12 +1,6 @@
         modified:   Makefile
-        modified:   includes/app.h
-        modified:   includes/builtin.h
-        modified:   includes/colors.h
-        modified:   includes/expander.h
-        modified:   includes/minishell.h
-        modified:   includes/msh_signals.h
         modified:   src/main.c
-        modified:   src/redirection/heredoc.c
-        modified:   src/signals/signals.c
+        modified:   src/parser/parser_utils_2.c
+        modified:   src/redirection/redirection.c
 
-git commit -m "handle signal 130. Norminette all  files"
+git commit -m "added default filename for redirection"

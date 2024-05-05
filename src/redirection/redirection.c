@@ -71,6 +71,13 @@ void	redir_append(char *name)
 	close(fd);
 }
 
+static char	*fname(t_darr *redir, int i)
+{
+	if (i < redir->count)
+		return (darray_get_at(redir, i));
+	return ("empty.txt");
+}
+
 void	ft_handle_redirection(t_cmd *cmd)
 {
 	t_darr	*redir;
@@ -78,6 +85,7 @@ void	ft_handle_redirection(t_cmd *cmd)
 	char	*name;
 	char	*s;
 
+	name = NULL;
 	redir = &cmd->redir;
 	i = 0;
 	while (i < redir->count)
@@ -86,7 +94,8 @@ void	ft_handle_redirection(t_cmd *cmd)
 		if (!ft_strncmp(s, ">", 1) || !ft_strncmp(s, "<", 2))
 		{
 			i++;
-			name = darray_get_at(redir, i);
+			// name = darray_get_at(redir, i);
+			name = fname(redir, i);
 		}
 		if (!ft_strncmp(s, ">", 2))
 			redir_out(name);

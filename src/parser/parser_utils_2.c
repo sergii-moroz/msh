@@ -41,7 +41,7 @@ void	handle_redir(t_cmd **cmd, char *value, t_parser_data *data, t_app *app)
 	}
 	else
 	{
-		ft_putendl_fd("filename expected", 1);
+		ft_putendl_fd("filename expected: default filename \"empty.txt\"", 1);
 		app->had_error = TRUE;
 	}
 }

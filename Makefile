@@ -5,8 +5,8 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 
 CC		=	cc
 CFLAGS =
-CFLAGS =	-Wall -Wextra -Werror -g
 CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror -g
 MAKE	=	make
 RM		=	rm -rf
 
@@ -73,7 +73,7 @@ test:
 			echo $(OBJ)
 
 val1:		all
-			valgrind --leak-check=full --show-leak-kinds=definite,indirect,possible ./minishell
+			valgrind --leak-check=full --show-leak-kinds=definite,indirect,possible --trace-children=yes ./minishell
 #--suppressions=suppress.val ./minishell
 #--trace-children=yes --gen-suppressions=yes
 #--show-reachable=yes
