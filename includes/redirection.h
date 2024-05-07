@@ -20,9 +20,11 @@
 
 # include "cmd.h"
 # include "executor.h"
+# include "expander.h"
 # include "msh_signals.h"
 
 void	ft_handle_redirection(t_cmd *cmd);
 void	handle_heredoc(t_cmd *cmd, t_app *app);
+char	*expand_argv(char *s, t_darr *envp);
 
 #endif

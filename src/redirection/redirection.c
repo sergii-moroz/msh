@@ -94,7 +94,6 @@ void	ft_handle_redirection(t_cmd *cmd)
 		if (!ft_strncmp(s, ">", 1) || !ft_strncmp(s, "<", 2))
 		{
 			i++;
-			// name = darray_get_at(redir, i);
 			name = fname(redir, i);
 		}
 		if (!ft_strncmp(s, ">", 2))

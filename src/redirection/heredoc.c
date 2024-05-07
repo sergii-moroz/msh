@@ -24,9 +24,10 @@ static void	hdoc_print_fd(t_darr *darr, int fd)
 	}
 }
 
-static t_darr	heredoc_read(char *end)
+static t_darr	heredoc_read(char *end, t_darr *envp)
 {
 	char	*line;
+	char	*new;
 	t_darr	hdoc;
 
 	darray_init(&hdoc);
@@ -37,12 +38,17 @@ static t_darr	heredoc_read(char *end)
 		if (!line || !ft_strncmp(line, end, ft_strlen(end) + 1))
 		{
 			if (!line)
-				g_code = 130;
+				g_code = 1;
 			free(line);
 			return (hdoc);
 		}
 		if (line && *line)
-			darray_append(&hdoc, line);
+		{
+			new = expand_argv(line, envp);
+			darray_append(&hdoc, new);
+			free(line);
+			//darray_append(&hdoc, line);
+		}
 	}
 }
 
@@ -94,7 +100,7 @@ static t_darr	get_input_from_hdoc(t_cmd *cmd, t_app *app)
 			end = darray_get_at(redir, i);
 			if (hdoc.count > 0)
 				darray_del_all(&hdoc);
-			hdoc = heredoc_read(end);
+			hdoc = heredoc_read(end, &app->env);
 		}
 		i++;
 	}

@@ -4,7 +4,6 @@ LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 CC		=	cc
-CFLAGS =
 CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
 CFLAGS =	-Wall -Wextra -Werror -g
 MAKE	=	make
@@ -32,15 +31,9 @@ SRC		=	main.c \
 			expander.c expander_utils.c \
 			redirection.c heredoc.c \
 			signals.c
-#			envp.c envl.c envl_utils.c envl_utils2.c \
-			executor.c \
-			builtin1.c builtin_utils.c \
-			ft_heredoc.c \
-			token.c
 
 OBJ_DIR	=	obj
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-#SRC	= $(addprefix $(SRC_DIR)/, $(SRC:.c=.o))
 
 all: 		$(NAME)
 

@@ -6,13 +6,14 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:52:23 by smoroz            #+#    #+#             */
-/*   Updated: 2024/05/03 20:52:23 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/05/06 13:58:44 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MSH_SIGNALS_H
 # define MSH_SIGNALS_H
 
+# include <stdio.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include "app.h"

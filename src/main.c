@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:29:50 by smoroz            #+#    #+#             */
-/*   Updated: 2024/05/02 16:42:56 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/05/06 15:42:52 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **env)
 		line = readline(app.msh_line);
 		if (!line)
 		{
-			g_code = 130;
+			g_code = 1;
 			break ;
 		}
 		if (*line)
