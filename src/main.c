@@ -31,6 +31,8 @@ void	app_helper(char *line, t_app *app)
 	if (app->tokens == NULL)
 		return ;
 	parser(app->tokens, app);
+	if (app->had_error)
+		return ;
 	expander_wrapper(&app->cmds, &app->env);
 	executor(app);
 }

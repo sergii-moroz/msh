@@ -46,11 +46,12 @@ void	token_print(void *token)
 
 void	token_set_type(t_token *token)
 {
-	if (!ft_strncmp(token->value, "||", 3))
+	/*if (!ft_strncmp(token->value, "||", 3))
 		token->type = IF_OR;
 	else if (!ft_strncmp(token->value, "&&", 3))
 		token->type = IF_AND;
-	else if (!ft_strncmp(token->value, ">>", 3))
+	else */
+	if (!ft_strncmp(token->value, ">>", 3))
 		token->type = DGREAT;
 	else if (!ft_strncmp(token->value, "<<", 3))
 		token->type = DLESS;

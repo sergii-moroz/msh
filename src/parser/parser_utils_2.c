@@ -15,6 +15,11 @@
 t_cmd	*parser_handle_pipe(t_app *app, t_cmd *cmd, t_parser_data *data)
 {
 	darray_append(&app->cmds, cmd);
+	if (cmd->argv.count == 0 && cmd->redir.count == 0 && !app->had_error)
+	{
+		ft_putstr_fd(RED"-msh: syntax error\n"RESET, 2);
+		app->had_error = TRUE;
+	}
 	cmd = cmd_create(app);
 	if (!cmd)
 		return (NULL);
