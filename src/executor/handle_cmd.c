@@ -19,11 +19,11 @@ static void	exec_general_cmd(t_cmd *cmd, t_app *app)
 	char	**envp;
 
 	handle_heredoc(cmd, app);
+	ft_handle_redirection(cmd);
 	if (cmd->argv.count == 0)
 		exit(EXIT_SUCCESS);
 	env_paths = ft_get_env(&app->env, "PATH");
 	cmd->path = get_path2binary(env_paths, darray_get_first(&cmd->argv));
-	ft_handle_redirection(cmd);
 	envp = (char **)(app->env).content;
 	argv = (char **)(cmd->argv).content;
 	execve(cmd->path, argv, envp);

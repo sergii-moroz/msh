@@ -54,6 +54,11 @@ void	parser(t_list *tokens, t_app *app)
 		parser_advance(&data);
 	}
 	darray_append(&app->cmds, cmd);
+	check_syntax_error(cmd, app);
+}
+
+void	check_syntax_error(t_cmd *cmd, t_app *app)
+{
 	if (cmd->argv.count == 0 && cmd->redir.count == 0 && !app->had_error)
 	{
 		ft_putstr_fd(RED"-msh: syntax error\n"RESET, 2);

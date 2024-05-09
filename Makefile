@@ -12,13 +12,13 @@ RM		=	rm -rf
 LIB		=	-lreadline -lft -L$(LIBFT_DIR)
 INC		=	-I includes
 
-SRC_DIRS	=	src/lexer src src/darray src/cmd \
+SRC_DIRS	=	src/lexer src src/darray src/cmd src/env \
 				src/parser src/executor src/envp src/signals \
 				src/expander src/builtin src/redirection
 vpath		%.c $(SRC_DIRS)
 
 SRC		=	main.c \
-			app.c env.c \
+			app.c env.c env_utils.c \
 			lexer.c lexer_utils.c lexer_methods_1.c \
 			lexer_methods_2.c lexer_methods_3.c lexer_token.c \
 			error.c \

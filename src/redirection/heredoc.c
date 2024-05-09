@@ -38,16 +38,15 @@ static t_darr	heredoc_read(char *end, t_darr *envp)
 		if (!line || !ft_strncmp(line, end, ft_strlen(end) + 1))
 		{
 			if (!line)
-				g_code = 1;
+				g_code = 0; // 1
 			free(line);
 			return (hdoc);
 		}
-		if (line && *line)
+		if (line) // && *line)
 		{
 			new = expand_argv(line, envp);
 			darray_append(&hdoc, new);
 			free(line);
-			//darray_append(&hdoc, line);
 		}
 	}
 }

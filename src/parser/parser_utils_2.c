@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:38:04 by olanokhi          #+#    #+#             */
-/*   Updated: 2024/05/06 13:51:07 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/05/09 12:29:35 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 t_cmd	*parser_handle_pipe(t_app *app, t_cmd *cmd, t_parser_data *data)
 {
 	darray_append(&app->cmds, cmd);
-	if (cmd->argv.count == 0 && cmd->redir.count == 0 && !app->had_error)
-	{
-		ft_putstr_fd(RED"-msh: syntax error\n"RESET, 2);
-		app->had_error = TRUE;
-	}
+	check_syntax_error(cmd, app);
 	cmd = cmd_create(app);
 	if (!cmd)
 		return (NULL);

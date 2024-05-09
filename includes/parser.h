@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 10:02:39 by smoroz            #+#    #+#             */
-/*   Updated: 2024/05/02 14:11:54 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/05/09 12:26:28 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_parser_data
 //			parser.c
 int		parser_peek_type(t_parser_data *data);
 void	parser(t_list *tokens, t_app *app);
+void	check_syntax_error(t_cmd *cmd, t_app *app);
 
 //		parser_utils_1.c
 void	parser_advance(t_parser_data *data);

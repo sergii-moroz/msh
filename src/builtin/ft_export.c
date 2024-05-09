@@ -6,7 +6,7 @@
 /*   By: smoroz <smoroz@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:53:28 by smoroz            #+#    #+#             */
-/*   Updated: 2024/05/06 13:44:08 by smoroz           ###   ########.fr       */
+/*   Updated: 2024/05/09 15:16:49 by smoroz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_char_index(char *s, int c)
 	return (-1);
 }
 
-static void	ft_export_print_declare(char **envp)
+void	ft_export_print_declare(char **envp)
 {
 	int		i;
 	int		eq_pos;
@@ -96,7 +96,7 @@ int	ft_export(t_cmd *cmd, t_app *app)
 
 	argv = &cmd->argv;
 	if (argv->count == 1)
-		ft_export_print_declare((char **)app->env.content);
+		env_declare(&(app->env));
 	res = 0;
 	i = 1;
 	while (i < argv->count)
