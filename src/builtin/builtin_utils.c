@@ -13,17 +13,45 @@
 #include "../includes/builtin.h"
 #include "../libft/libft.h"
 
+char	*only_cmd_name(char *path)
+{
+	char	*p;
+	char	*cmd_name;
+
+	cmd_name = path;
+	p = path;
+	while (p && *p)
+	{
+		if (*p == '/')
+			cmd_name = p + 1;
+		p++;
+	}
+	return (cmd_name);
+}
+
 int	is_builtin(char *path_name)
 {
+	//char	*p;
+	char	*cmd_name;
+
+	//cmd_name = path_name;
+	//p = path_name;
 	if (!path_name)
 		return (0);
-	if (!ft_strncmp(path_name, "cd", 3) || \
-		!ft_strncmp(path_name, "pwd", 4) || \
-		!ft_strncmp(path_name, "env", 4) || \
-		!ft_strncmp(path_name, "exit", 5) || \
-		!ft_strncmp(path_name, "echo", 5) || \
-		!ft_strncmp(path_name, "unset", 6) || \
-		!ft_strncmp(path_name, "export", 7))
+	/*while (p && *p)
+	{
+		if (*p == '/')
+			cmd_name = p + 1;
+		p++;
+	}*/
+	cmd_name = only_cmd_name(path_name);
+	if (!ft_strncmp(cmd_name, "cd", 3) || \
+		!ft_strncmp(cmd_name, "pwd", 4) || \
+		!ft_strncmp(cmd_name, "env", 4) || \
+		!ft_strncmp(cmd_name, "exit", 5) || \
+		!ft_strncmp(cmd_name, "echo", 5) || \
+		!ft_strncmp(cmd_name, "unset", 6) || \
+		!ft_strncmp(cmd_name, "export", 7))
 		return (1);
 	return (0);
 }

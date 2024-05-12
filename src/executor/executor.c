@@ -39,6 +39,7 @@ void	exec_builtin(t_cmd *cmd, t_app *app)
 	handle_heredoc(cmd, app);
 	ft_handle_redirection(cmd);
 	cmd_name = cmd_argv_at(cmd, 0);
+	cmd_name = only_cmd_name(cmd_name);
 	if (!ft_strncmp(cmd_name, "cd", 3))
 		ft_cd(cmd, app);
 	else if (!ft_strncmp(cmd_name, "pwd", 4))

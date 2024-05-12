@@ -38,5 +38,6 @@ int		is_builtin(char *path_name);
 int		ft_isvalid_int(char *str);
 int		ft_isvalid_identifier(char *s);
 void	ft_putstrn_fd(char *s, int n, int fd);
+char	*only_cmd_name(char *path);
 
 #endif
